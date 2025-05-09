@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    max-height: 100vh;
+
+}
+
+.container {
+    /* background: linear-gradient(#232E86 80%, #719BEB ); */
+
+    display: flex;
+    align-items: center;
+    max-height: 100vh;
+    height: 100vh;
+    padding: 40px;
+    column-gap: 35px;
+
+
+
+}
+
+.ContainerEsquerdo {
+
+    /* background-color: #84b6f4; */
+    background-color: #155d9c;
+    width: 600px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    height: 100%;
+    font-family: "Poetsen One", sans-serif;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    /* letter-spacing: 1.2px; */
+    padding: 20px;
+    text-align: center;
+
+}
+
+.citacao {
+    /* text-wrap: balance;    */
+    text-align: justify;
+    margin-top: 40px;
+    line-height: 30px;
+}
+
+.nomeAutor {
+    text-align: center;
+    margin-top: 10px;
+
+}
+
+img {
+    width: 80%;
+
+}
+
+
+
+
+.formulario {
+    max-width: 900px;
+    font-family: "Poetsen One", sans-serif;
+    justify-self: center;
+    flex-grow: 1;
+    margin: 0 auto;
+
+}
+
+
+.nomeSobrenome,
+.contato,
+.senhaUsuario {
+    display: flex;
+    column-gap: 30px;
+
+}
+
+.grupoInput {
+    flex-grow: 1;
+
+}
+
+h1 {
+    /* color: #5064C4; */
+    color: #155d9c;
+    text-align: center;
+    font-size: 70px;
+    font-family: "Poetsen One", sans-serif;
+    margin-bottom: 35px;
+
+}
+
+label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: #155d9c;
+    font-family: "Poetsen One", sans-serif;
+}
+
+input {
+    padding: 10px 5px;
+    border-radius: 10px;
+    border: solid 2px #696666a2;
+    font-size: 20px;
+    width: 100%;
+
+
+}
+
+button {
+    display: block;
+    width: 50%;
+    margin: 35px auto 10px;
+    border-radius: 15px;
+    padding: 15px;
+    border: none;
+    color: white;
+    background-color: #1b5d97;
+    font-size: 20px;
+    font-family: "Poetsen One", sans-serif;
+    cursor: pointer;
+}
+
+span {
+    display: block;
+    text-align: center;
+    font-family: "Poetsen One", sans-serif;
+    font-size: 18px;
+    color: #155d9c;
+}
+
+a {
+    color: #FFC100;
+    text-decoration: none;
+}
