@@ -8,9 +8,9 @@
 }
 
 .ContainerEsquerdo {
-    background: linear-gradient(to top, hsla(208, 76%, 35%, 1) 25%, hsla(236, 47%, 27%, 1) 80%);
     width: 600px;
-    border-top-left-radius: 50px;
+    background: linear-gradient(to top, hsla(208, 76%, 35%, 1) 25%, hsla(236, 47%, 27%, 1) 80%);
+    border-top-left-radius: 50px; 
     border-top-right-radius: 10px;
     border-bottom-right-radius: 50px;
     border-bottom-left-radius: 10px;
@@ -20,12 +20,13 @@
     font-weight: bold;
     padding: 20px;
     text-align: center;
+     
 
 }
 
 .citacao {
     text-align: justify;
-    margin-top: 50px;
+    margin-top: 40px;
     line-height: 35px;
 }
 
@@ -39,22 +40,11 @@ img {
 }
 
 .formulario {
-    max-width: 900px;
+    max-width: 800px;
     justify-self: center;
     flex-grow: 1;
     margin: 0 auto;
 
-}
-
-.nomeSobrenome,
-.contato,
-.senhaUsuario {
-    display: flex;
-    column-gap: 30px;
-}
-
-.grupoInput {
-    flex-grow: 1;
 }
 
 h1 {
@@ -78,7 +68,6 @@ label {
 input {
     padding: 10px 5px;
     border-radius: 10px;
-    border: solid 2px var(--cinza);
     font-size: 20px;
     width: 100%;
 }
@@ -95,8 +84,8 @@ button {
     font-size: 20px;
     cursor: pointer;
     position: relative;
+    z-index: 1;
     overflow: hidden;
-    z-index: 2;
 }
 
 button:before {
@@ -125,6 +114,4 @@ span {
 a {
     color: var(--amarelo);
     text-decoration: none;
-  
 }
-

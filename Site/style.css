@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poetsen One", sans-serif;
+
+    --azul: #155d9c;
+    --branco: #ffffff;
+    --amarelo: #FFC100;
+    --cinza: #696666a2;
+    --padding-horizontal-padrao: 50px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+}
+
+
+nav {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    font-size: 20px;
+    padding: 15px var(--padding-horizontal-padrao);
+
+    color: #fff;
+    background: linear-gradient(to right, #155e9d 25%, hsla(236, 47%, 27%, 1) 80%);
+}
+
+.navLinks {
+    display: flex;
+    margin-right: auto;
+    column-gap: 10px;
+}
+
+.navLinks li {
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+}
+
+.navLinks li a {
+    color: #fff;
+}
+
+.navLinks li::after {
+    content: "";
+    height: 4px;
+    border-radius: 10px;
+    background: var(--amarelo);
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    transform: scale(0);
+    transition: transform 0.4s ease;
+}
+
+.navLinks li:hover::after {
+    transform: scale(1);
+}
+
+.entrar,
+.fazerParte {
+    border-radius: 10px;
+    font-size: 20px;
+    transition: transform 0.3s ease-in;
+}
+
+.entrar:hover,
+.fazerParte:hover {
+    transform: scale(1.2);
+}
+
+.entrar {
+    padding: 10px 20px;
+    color: #242865;
+    background-color: var(--amarelo);
+    border: solid 2px var(--amarelo);
+}
+
+.fazerParte {
+    padding: 10px 15px;
+    color: var(--branco);
+    border: solid 2px var(--amarelo);
+}
+
+button {
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
