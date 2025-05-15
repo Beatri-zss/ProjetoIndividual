@@ -8,7 +8,7 @@
     --branco: #ffffff;
     --amarelo: #FFC100;
     --cinza: #696666a2;
-    --padding-horizontal-padrao: 50px;
+    --padding-horizontal-padrao: 70px;
 }
 
 html {
@@ -34,12 +34,12 @@ nav {
 .navLinks {
     display: flex;
     margin-right: auto;
-    column-gap: 10px;
+    column-gap: 20px;
 }
 
 .navLinks li {
     cursor: pointer;
-    padding: 10px;
+    padding: 10px 0;
     position: relative;
 }
 

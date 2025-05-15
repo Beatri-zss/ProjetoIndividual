@@ -75,7 +75,7 @@ label {
     color: var(--azul);
 }
 
-input {
+input, select {
     padding: 10px 5px;
     border-radius: 10px;
     border: solid 2px var(--cinza);
