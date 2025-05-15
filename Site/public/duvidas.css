@@ -1,0 +1,94 @@
+.container {
+    display: flex;
+    align-items: center;
+    column-gap: 50px;
+    justify-content: space-around;
+
+    padding: 0 50px;
+}
+
+h1 {
+    font-size: 45px;
+    margin: 15px 0;
+
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: center;
+    color: #050E50;
+}
+
+.paragrafo1 {
+    font-size: 24px;            
+    margin-bottom: 30px;
+    text-align: center;
+    color: #050E50;
+}
+
+.faq {
+    max-width: 900px;
+}
+
+.faq li {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+
+.faq li label {
+    font-size: 24px;
+    /* font-weight: 500; isso só funciona a depender da familia de fonte escolhida */
+    background-color: #155D9C;
+    color: #ffff;
+    cursor: pointer;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.faq li label::after {
+    content: '+';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    width: 30px;
+    height: 30px;
+    background-color: #242865;
+    border-radius: 50%;
+    transition: background-color .5s;
+}
+
+.faq input[type=checkbox] {
+    display: none;
+}
+
+.faq .resposta {
+    background-color: #0f406c;
+    color: #ffff;
+    padding: 0px 14px;
+    line-height: 32px;
+    max-height: 0;
+    font-size: 22px;
+    /* isso faz com que a caixa que estava guardando as respostas encolha = respostas vazadas*/
+    overflow: hidden;
+    /* isso significa que tudo que ficar vazado da estrutura ficará escondido */
+    transition: max-height .5s, padding .5s;
+}
+
+.faq input[type=checkbox]:checked+label+.resposta {
+    padding: 20px;
+    max-height: 400px;
+}
+
+/* isso pega o momento em que o input estiver checked = selecionado/marcado para aplicar um estilo, no caso vai aplicar um sinal de mais, chamar o label outro + e chamar a class .resposta*/
+
+.faq input[type=checkbox]:checked+label::after {
+    content: '-';
+    font-size: 50px;
+    color: #0f406c;
+    background-color: #FFC100;
+
+}
