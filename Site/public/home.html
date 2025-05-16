@@ -1306,8 +1306,8 @@
     <div id="dashboard">
         <ul class="kpisContainer">
             <li class="kpi">
-                <p class="descricao">Quantidade de usuários</p>
-                <p class="valor">52</p>
+                <p class="descricao">Gênero mais favoritado</p>
+                <p class="valor">Romance</p>
             </li>
             <li class="kpi">
                 <p class="descricao">Quantidade de livros</p>
@@ -1321,12 +1321,109 @@
        
         <div class="graficos-container">
             <div class="grafico">
-                <canvas id="emprestimosUltimosMeses"></canvas>
+                <canvas id="percentualGenerosFavoritos"></canvas>
             </div>
-            <div class="grafico">
+            
+            <div class="grafico-pizza">
                 <canvas id="percentualDeEmprestimos"></canvas>
             </div>
-                <canvas id="qtdUsuariosCadastrados"></canvas>
+            
+            <div class="grafico">
+                <canvas id="emprestimosUltimosMeses"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div id="faq">
+
+        <h1 class="titulo-faq">
+            <img src="/assets/interrogação.svg" alt="">
+            Dúvidas
+        </h1>
+        <p class="paragrafo1">Aqui você encontrará as principais dúvidas da plataforma</p>
+
+        <div class="container-faq">
+            <img src="/assets/Questions-pana.svg" alt="">
+
+            <ul class="faq">
+                <li>
+                    <input type="checkbox" name="arcodeon" id="primeiro">
+                    <label for="primeiro"> Qual o objetivo desse projeto?</label>
+                    <div class="resposta">
+                        <p> O projeto visa disponibilizar o acesso a livros e conhecimento de forma gratuita para os
+                            alunos
+                            da SPTech, além de possibilitar maior conexão entre aqueles interessados na leitura. </p>
+                    </div>
+                </li>
+
+                <li>
+                    <input type="checkbox" name="arcodeon" id="segundo">
+                    <label for="segundo">Como funciona? </label>
+                    <div class="resposta">
+                        <p> Eu, Beatriz, aluna da Sptech, irei disponibilizar aos alunos da SPTech meus livros para
+                            empréstimo através do site.</p>
+                    </div>
+                </li>
+
+                <li>
+                    <input type="checkbox" name="arcodeon" id="terceiro">
+                    <label for="terceiro"> Posso disponibilizar meus livros para empréstimo também?</label>
+                    <div class="resposta">
+                        <p> No momento não, mas desejo expandir o projeto para que todos possam compartilhar seus livros
+                            e
+                            assim criar uma grande comunidade entre os alunos leitores da SPTech.</p>
+                    </div>
+                </li>
+
+                <li>
+                    <input type="checkbox" name="arcodeon" id="quarto">
+                    <label for="quarto"> Como pego um livro emprestado?</label>
+                    <div class="resposta">
+                        <p> Na página de <a href="catalogo.html">Catálogo</a>, você deve encontrar o livro que deseja e clicar no botão
+                            “Pedir
+                            emprestado”.</p>
+                    </div>
+                </li>
+
+                <li>
+                    <input type="checkbox" name="arcodeon" id="quinto">
+                    <label for="quinto"> Como funciona a entrega do livro que solicitei?</label>
+                    <div class="resposta">
+                        <p> Após solicitar o livro pelo site entrarei em contato pelo E-mail utilizado em seu cadastro
+                            para
+                            combinarmos o horário e local de entrega do livro. <br> <strong>Atenção:</strong> por
+                            questões
+                            de segurança, os livros devem ser retirados e devolvidos na faculdade.</p>
+                    </div>
+                </li>
+
+                <li>
+                    <input type="checkbox" name="arcodeon" id="sexto">
+                    <label for="sexto">Quantos dias posso ficar com o livro?</label>
+                    <div class="resposta">
+                        <p> Inicialmente, você poderá ficar com o livro por 20 dias. Porém, caso precise de mais tempo,
+                            poderá entrar em contato comigo para checarmos a possibilidade de estender o empréstimo por
+                            um
+                            período extra de 20 dias.</p>
+                    </div>
+                </li>
+
+                <li>
+                    <input type="checkbox" name="arcodeon" id="setimo">
+                    <label for="setimo"> Quantos livros posso pegar ao mesmo tempo?</label>
+                    <div class="resposta">
+                        <p> Será possível pegar apenas 1 livro por vez.</p>
+                    </div>
+                </li>
+
+                <!-- <li>
+                                            <input type="checkbox" name="arcodeon" id="oitavo">
+                                            <label for="oitavo"> Por que é obrigatório por uma foto no cadastro? </label>
+                                            <div class="resposta">
+                                                <p> A foto é necessária para facilitar a identificação no momento de entrega do livro.</p>
+                                            </div>
+                                        </li> -->
+            </ul>
         </div>
     </div>
 
@@ -1334,20 +1431,21 @@
 </body>
 </html>
 <script>
+var respostaAPI = [2, 25, 10, 6, 20, 4, 9, 12, 14, 7]
 
-new Chart(qtdUsuariosCadastrados, {
-    type: 'line',
+
+new Chart(percentualGenerosFavoritos, {
+    type: 'bar',
     data: {
         labels:[
-            'Dezembro/24','Janeiro/25', 'Fevereiro/25', 'Março/25','Abril/25', 'Maio/25'
+            'Terror', 'Romance', 'Ficção Científica', 'Distopia', 'Fantasia', 'Não-Ficção', 'Suspense', 'Mangá/HQ', 'Aventura', 'Outros'
         ],
         datasets: [
             {
-            label: 'Usuários cadastrados',
-            data: [3,6,12,24,50,52],
+            label: 'Quantidade por gênero',
+            data: respostaAPI,
             fill: false,
-            borderColor: 'red',
-            tension: 0.1
+            backgroundColor: ['#90caf9', '#5dade2', '#64b5f6', '#42a5f5', '#1565c0', '#0d47a1']
             }
         ]
 }
@@ -1360,7 +1458,7 @@ new Chart(emprestimosUltimosMeses, {
         datasets: [{
             label: 'Quantidade de empréstimos no mês',
             data: [1, 5, 10, 20, 16, 13, 7],
-            backgroundColor: ['purple', 'yellow', 'cyan', 'red', 'lime', 'coral'],
+            backgroundColor: ['#90caf9', '#5dade2', '#64b5f6', '#42a5f5', '#1565c0', '#0d47a1'],
 
         }]
     }
@@ -1387,7 +1485,7 @@ new Chart(emprestimosUltimosMeses, {
                 ],
                 hoverOffset: 4
             }]
-        }
+        },
     })
 
 
