@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="quiz.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body onload="carregarPergunta()">
+    <nav>
+      <ul class="navLinks">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="home.html">Dashboard</a></li>
+        <li><a href="home.html">Dúvidas</a></li>
+        <li><a>Catálogo</a></li>
+        <li><a href="#">Quiz</a></li>
+      </ul>
+      <a class="entrar" href="login.html">Entrar</a>
+      <a class="fazerParte" href="cadastro.html">Faça parte</a>
+    </nav>
+
+    <div class="container">
+
+      <div class="container-perguntas">
+        <p id="contadorPergunta">Questão 1 de 10</p>
+        <p id="pergunta">Quem é o pai de Percy Jackson?</p>
+      </div>
+
+      <div class="container-respostas">
+        <ul id="respostas"></ul>
+        <button id="botaoProximaPergunta" onclick="proximaPergunta()">Próxima Pergunta</button>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  var contagemPerguntas = 1;
+  var perguntas = [
+    {
+      enunciado: 'Quem escreveu o livro "Dom Quixote"?',
+      A: "Jorge Amado",
+      B: "Jane Austen",
+      C: "Machado de Assis",
+      D: "Miguel de Cervantes",
+      respostaCorreta: "D",
+    },
+    {
+      enunciado: 'Quem é o autor do livro "O Pequeno Príncipe"?',
+      A: "Neil Gaiman",
+      B: "George Orwell",
+      C: "Antoine de Saint-Exupéry",
+      D: "Charles Dickens",
+      respostaCorreta: "C",
+    },
+    {
+      enunciado: 'Quem é o autor do livro "Dom Casmurro"?',
+      A: "Machado de Assis",
+      B: "Graciliano Ramos",
+      C: "Stefano Volp",
+      D: "Ligia Fagundes Teles",
+      respostaCorreta: "A",
+    },
+    {
+      enunciado:
+        "De qual livro esse trecho pertence: “Quando Gregor Samsa acordou uma manhã de sonhos inquietos, viu-se transformado em sua cama num inseto gigantesco”?",
+      A: "Crime e Castigo",
+      B: "A Metamorfose",
+      C: "As viagens de Gulliver",
+      D: "Harry Potter e o Prisioneiro de Azkaban",
+      respostaCorreta: "B",
+    },
+    {
+      enunciado: "Percy Jackson é filho de qual Deus?",
+      A: "Hermes",
+      B: "Zeus",
+      C: "Poseidon",
+      D: "Hades",
+      respostaCorreta: "C",
+    },
+  ];
+
+  function carregarPergunta() {
+    var perguntaAtual = perguntas[contagemPerguntas - 1];
+
+    pergunta.innerHTML = perguntaAtual.enunciado;
+
+    respostas.innerHTML = `
+        <li class="resposta">
+            <span> A </span>
+            <p> ${perguntaAtual.A} </p>
+        </li>
+        <li class="resposta">
+            <span> B </span>
+            <p> ${perguntaAtual.B} </p>
+        </li>
+        <li class="resposta">
+            <span> C </span>
+            <p> ${perguntaAtual.C} </p>
+        </li>
+        <li class="resposta">
+            <span> D </span>
+            <p> ${perguntaAtual.D} </p>
+        </li>
+    `;
+  }
+
+  function proximaPergunta() {
+    contagemPerguntas++
+    carregarPergunta()
+  }
+</script>
