@@ -33,11 +33,14 @@
       <div class="container-perguntas">
         <p id="contadorPergunta">Questão 1 de 10</p>
         <p id="pergunta">Quem é o pai de Percy Jackson?</p>
+        <div class="barraProgresso">
+          <div id="preenchimento"></div>
+        </div>
       </div>
 
       <div class="container-respostas">
-        <ul id="respostas"></ul>
-        <button id="botaoProximaPergunta" onclick="proximaPergunta()">Próxima Pergunta</button>
+        <div id="respostas"></div>
+        <button id="botaoProximaPergunta" onclick="proximaPergunta()" disabled>Próxima Pergunta</button>
       </div>
     </div>
   </body>
@@ -45,6 +48,7 @@
 
 <script>
   var contagemPerguntas = 1;
+  var contadorAcertos = 0
   var perguntas = [
     {
       enunciado: 'Quem escreveu o livro "Dom Quixote"?',
@@ -95,27 +99,55 @@
     pergunta.innerHTML = perguntaAtual.enunciado;
 
     respostas.innerHTML = `
-        <li class="resposta">
+        <button class="resposta" id="respostaA" onclick="responder('A', this)">
             <span> A </span>
             <p> ${perguntaAtual.A} </p>
-        </li>
-        <li class="resposta">
+        </button>
+        <button class="resposta" id="respostaB" onclick="responder('B', this)">
             <span> B </span>
             <p> ${perguntaAtual.B} </p>
-        </li>
-        <li class="resposta">
+        </button>
+        <button class="resposta" id="respostaC" onclick="responder('C', this)">
             <span> C </span>
             <p> ${perguntaAtual.C} </p>
-        </li>
-        <li class="resposta">
+        </button>
+        <button class="resposta" id="respostaD" onclick="responder('D', this)">
             <span> D </span>
             <p> ${perguntaAtual.D} </p>
-        </li>
+        </button>
     `;
+  }
+
+  function responder(alternativa, elementoClicado){
+    var perguntaAtual = perguntas[contagemPerguntas - 1];
+    
+    if(perguntaAtual.respostaCorreta == alternativa){
+      elementoClicado.classList.add("certo") // Adicionando a classe "certo" na alternativa clicada
+      contadorAcertos++
+    }
+    else {
+      elementoClicado.classList.add("errado") // Adicionando a classe "errado" na alternativa clicada
+    }
+
+    /* Desabilitando os botões de alternativas */
+    respostaA.disabled = true
+    respostaB.disabled = true
+    respostaC.disabled = true
+    respostaD.disabled = true
+
+    /* Habilitando o botão para ir para a próxima pergunta */
+    botaoProximaPergunta.disabled = false
   }
 
   function proximaPergunta() {
     contagemPerguntas++
     carregarPergunta()
+    preenchimento.style.setProperty("--largura", contagemPerguntas * 10 + '%')
+
+    /* Desabilitando o botão que vai para a próxima pergunta */
+    botaoProximaPergunta.disabled = true
+
+    // Atualizando texto da questão atual
+    contadorPergunta.innerHTML = `Questão ${contagemPerguntas} de ${perguntas.length}`
   }
 </script>

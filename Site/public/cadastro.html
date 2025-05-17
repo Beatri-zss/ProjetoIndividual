@@ -25,7 +25,7 @@
                 Eles nos permitem viajar através do tempo e espaço, conhecer pessoas e lugares diferentes e explorar
                 ideias e conceitos que nos desafiam e enriquecem."
             </p>
-            <p class="nomeAutor">  Anne Lamott.</p>
+            <p class="nomeAutor"> Anne Lamott.</p>
 
 
             <img src="/assets/Bibliophile-bro.svg" alt="">
@@ -82,13 +82,45 @@
                 <option value="Outros">📚 Outros</option>
             </select>
 
-            <button>Fazer Parte!</button>
+            <button onli="validacao()">Fazer Parte!</button>
             <span>Já possui uma conta? <a href="Login.html"> Clique aqui!</a>
             </span>
 
         </div>
     </div>
-
 </body>
 
 </html>
+
+<script>
+
+    function validacao(){
+
+        var nome = inputNome.value;
+        var sobrenome = inputSobrenome.value;
+        var telefone = inputTelefone.value;
+        var email = inputEmail.value;
+        var senha = inputSenha.value;
+        var confirmarSenha = inputSenhaConfirmar.value;
+
+
+
+
+        if(
+            nome == "" ||
+            sobrenome == "" ||
+            telefone == "" ||
+            email == "" ||
+            senha == "" ||
+            confirmarSenha == "" ){
+                alert("mensagem de erro para todos os campos vazios")
+
+                    }
+
+       
+
+
+    }
+
+
+</script>
