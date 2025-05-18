@@ -25,7 +25,7 @@
                 interna."
             </p>
             <p class="nomeAutor"> — Chimamanda Ngozi Adichie</p>
-            <img src="/assets/Reading book-pana.svg" alt="">
+            <img src="/Site/assets/Reading book-pana.svg" alt="">
         </div>
 
         <div class="formulario">
@@ -40,14 +40,32 @@
                 <input type="text" id="inputSenha">
             </div>
 
-            <button>Entrar</button>
+            <button onclick="validar()">Entrar</button>
             <span>Ainda não possui uma conta? <a href="cadastro.html"> Clique aqui!</a>
             </span>
 
         </div>
-
-
     </div>
 </body>
-
 </html>
+<script>
+
+ function validar(){
+
+    var email = inputEmail.value;
+    var senha = inputSenha.value;
+
+    if(!email.includes("@")){
+        alert("email inválido")
+    }
+    
+    else if(senha.length < 5){
+        alert("senha deve ter pelo menos 5 caracteres ")
+    }
+
+
+
+ }
+
+
+</script>
