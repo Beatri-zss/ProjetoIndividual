@@ -14,6 +14,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
         rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </head>
 
 <body onload="carregarCatalogo()">
@@ -35,45 +38,12 @@
         </div>
     </div>
 
-    <dialog id="modalDetalhesLivro">
-        <button class="fechar" onclick="modalDetalhesLivro.close()">X</button>
-        <div>
-
-            <p class="titulo">A metamorfose</p>
-
-            <p class="autor">Franz Kafka</p>
-
-            <div class="detalhes-adicionais">
-                <p>Editora:
-                    <br>
-                    <span>Principis</span>
-                </p>
-
-                <p>Data de publicação:
-                    <br> <span>2019-09-27</span>
-                </p>
-
-                <p>Gênero:
-                    <br>
-                    <span>Ficção</span>
-                </p>
-            </div>
-
-            <p class="descricao">
-                O caixeiro-viajante Gregor acorda metamorfoseado em um enorme inseto e percebe que tudo mudou e
-                não só em sua vida, mas no mundo. Ele, então, acompanha as reações de sua família ao perceberem o
-                estranho ser em que ele se tornou. E, enquanto luta para se manter vivo, reflete sobre o comportamento
-                de seus pais, de sua irmã e sobre a sua nova vida</p>
-        </div>
-
-        <img src="https://m.media-amazon.com/images/I/715JOcuqSSL._SL1021_.jpg">
-
-    </dialog>
+    <dialog id="modalDetalhesLivro"></dialog>
 </body>
 
 </html>
 <script>
-    modalDetalhesLivro.showModal()
+
 
     var livros = [
         {
@@ -186,12 +156,63 @@
                 <div class="livro ${classeIndisponivel}">
                     <img src="${livro.url_capa}">
                     <p>${livro.titulo}</p>
-                    <button class="botao-emprestar"> Pedir emprestado </button>
-                    <button class="botao-detalhes-livro">Mais detalhes</button>
+                    <button class="botao-emprestar"  onclick="pedirEmprestado()"> Pedir emprestado </button>
+                    <button class="botao-detalhes-livro"  onclick ="verDetalhes(${i})">Mais detalhes</button>
                 </div>
             `
         }
 
         listaLivros.innerHTML = htmlLivros;
     }
+
+    function pedirEmprestado() {
+
+        Swal.fire({
+            title: "Solicitação criada com sucesso!",
+            html: "O portador do livro entrará em contato via email cadastrado no site para tratar mais detalhes. Fique de olho!! ",
+            icon: "success",
+            color: "#000",
+            confirmButtonColor: "#155d9c",
+            background: "#f4f6fa"
+        });
+
+
+
+    }
+
+    function verDetalhes(indiceLivro) {
+        var livroDetalhes = livros[indiceLivro]
+
+        modalDetalhesLivro.innerHTML = `
+        <button class="fechar" onclick="modalDetalhesLivro.close()">X</button>
+        <div>
+
+            <p class="titulo">${livroDetalhes.titulo}</p>
+
+            <p class="autor">${livroDetalhes.autor}</p>
+
+            <div class="detalhes-adicionais">
+                <p>Editora:
+                    <br>
+                    <span>${livroDetalhes.editora}</span>
+                </p>
+
+                <p>Data de publicação:
+                    <br> <span>${new Date(livroDetalhes.data_publicacao).toLocaleDateString("pt-br")}</span>
+                </p>
+
+                <p>Gênero:
+                    <br>
+                    <span>${livroDetalhes.genero}</span>
+                </p>
+            </div>
+
+            <p class="descricao">${livroDetalhes.descricao}</p>
+        </div>
+
+        <img src="${livroDetalhes.url_capa}">
+`
+        modalDetalhesLivro.showModal()
+    }
+
 </script>
