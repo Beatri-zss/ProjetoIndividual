@@ -8,7 +8,7 @@
 }
 
 .ContainerEsquerdo {
-    background: linear-gradient(to top, hsla(208, 76%, 35%, 1) 25%, hsla(236, 47%, 27%, 1) 80%);
+    background: linear-gradient(to top, #155e9d 25%, #242965 80%);
     width: 600px;
     border-top-left-radius: 50px;
     border-top-right-radius: 10px;
@@ -58,7 +58,7 @@ img {
 }
 
 h1 {
-    background: linear-gradient(to right, hsla(208, 76%, 35%, 1) 25%, hsla(236, 47%, 27%, 1) 80%);
+    background: linear-gradient(to right, #155e9d 25%, #242965 80%);
     color: transparent;
     background-clip: text;
     text-align: center;
