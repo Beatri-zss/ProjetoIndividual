@@ -91,6 +91,21 @@ nav {
     border: solid 2px var(--amarelo);
 }
 
+#usuarioLogadoNav {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+}
+
+#usuarioLogadoNav button {
+    border: 0;
+    background: transparent;
+}
+
+#usuarioLogadoNav img {
+    width: 30px;
+}
+
 button {
     cursor: pointer;
 }

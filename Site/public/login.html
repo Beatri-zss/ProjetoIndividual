@@ -20,6 +20,24 @@
 
 <body>
 
+    <nav>
+        <ul class="navLinks">
+            <li><a href="#container">Home</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#faq">Dúvidas</a></li>
+            <li><a href="catalogo.html">Catálogo</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+        </ul>
+
+        <div id="botoesAutenticaoNav">
+            <a class="entrar" href="login.html">Entrar</a>
+            <a class="fazerParte" href="cadastro.html">Faça parte</a>
+        </div>
+
+        <div id="usuarioLogadoNav"></div>
+    </nav>
+
+
     <div class="container">
 
         <div class="ContainerEsquerdo">
@@ -29,7 +47,7 @@
                 interna."
             </p>
             <p class="nomeAutor"> — Chimamanda Ngozi Adichie</p>
-            <img src="/Site/assets/Reading book-pana.svg" alt="">
+            <img src="/assets/Reading-book-pana.svg" alt="">
         </div>
 
         <div class="formulario">
@@ -44,7 +62,7 @@
                 <input type="text" id="inputSenha">
             </div>
 
-            <button class="botao-entrar" onclick="validar()">Entrar</button>
+            <button class="botao-entrar" onclick="entrar()">Entrar</button>
             <span>Ainda não possui uma conta? <a href="cadastro.html"> Clique aqui!</a>
             </span>
 
@@ -55,25 +73,21 @@
 </html>
 <script>
 
-    function validar() {
+    function entrar() {
 
         var email = inputEmail.value;
         var senha = inputSenha.value;
         var mensagemError = ""
 
         if (!email.includes("@") || email.length < 5) {
-
             mensagemError = "Email inválido! <br>"
         }
 
         if (senha.length < 5) {
-
             mensagemError += " Senha deve ter pelo menos 5 caracteres."
-
         }
 
         if (mensagemError != "") {
-
             Swal.fire({
                 title: "Não foi possível realizar o login!",
                 html: mensagemError,
@@ -82,10 +96,40 @@
                 confirmButtonColor: "#155d9c",
                 background: "#f4f6fa"
             });
+
             return false;
         }
 
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senha
+            })
+        })
+            .then(function (resultado) {
+                if (resultado.ok) {
+                    resultado.json().then(function (json) {
+                        sessionStorage.setItem("NOME_USUARIO", json.nome)
+                        sessionStorage.setItem("EMAIL_USUARIO", json.email)
+                        sessionStorage.setItem("ID_USUARIO", json.idUsuario)
 
+                        window.location = "catalogo.html"
+                    })
+                }
+
+                Swal.fire({
+                    title: "Não foi possível realizar o login!",
+                    html: "Email ou senha inválido(s)",
+                    icon: "error",
+                    color: "#000",
+                    confirmButtonColor: "#155d9c",
+                    background: "#f4f6fa"
+                });
+            })
     }
 
 

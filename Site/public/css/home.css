@@ -7,7 +7,7 @@
     padding: 0 var(--padding-horizontal-padrao);
 }
 
-svg {
+#container .imagem-pessoa-lendo-home {
     width: 800px;
 }
 
@@ -40,11 +40,11 @@ span {
     background: #fff;
     border: 2px solid #155e9d;
     position: absolute;
-    bottom: 30px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
 
-    animation: jump 1.1s 5s infinite;
+    /* animation: jump 1.1s 5s infinite; */
 }
 
 .dashboard-link img {
@@ -54,7 +54,7 @@ span {
 
 #dashboard {
     min-height: 100vh;
-    background-color: #f4f4f4;
+    background-color: #f4f6fa;
     padding: 30px var(--padding-horizontal-padrao);
 }
 
@@ -70,6 +70,7 @@ span {
     text-align: center;
     padding: 10px 20px;
     border-radius: 10px;
+    background: #fff;
     border: 1px solid gray;
 }
 

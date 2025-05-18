@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogo</title>
+
+    <link rel="stylesheet" href="../css/catalogo.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <script src="js/sessao.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
+        rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+</head>
+
+<body onload="validarSessao(), carregarCatalogo()">
+    <nav>
+        <ul class="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="index.html">Dúvidas</a></li>
+            <li><a href="#">Catálogo</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+        </ul>
+
+        <div id="botoesAutenticaoNav">
+            <a class="entrar" href="login.html">Entrar</a>
+            <a class="fazerParte" href="cadastro.html">Faça parte</a>
+        </div>
+
+        <div id="usuarioLogadoNav"></div>
+    </nav>
+
+    <div class="container">
+        <div id="listaLivros">
+
+        </div>
+    </div>
+
+    <dialog id="modalDetalhesLivro"></dialog>
+</body>
+
+</html>
+<script>
+    var livros = []
+
+    function carregarCatalogo() {
+        var htmlLivros = "";
+
+        fetch("/livros/listar")
+            .then(function (resultado) {
+                console.log(resultado)
+
+                if (resultado.ok) {
+                    resultado.json()
+                        .then(function (json) {
+                            livros = json
+
+                            json.forEach((livro, index) => {
+                                var classeIndisponivel = ""
+
+                                if (livro.disponivel == false) {
+                                    classeIndisponivel = "indisponivel"
+                                }
+
+                                htmlLivros +=
+                                    `
+                <div class="livro ${classeIndisponivel}">
+                    <img src="${livro.url_capa}">
+                    <p>${livro.titulo}</p>
+                    <button class="botao-emprestar"  onclick="pedirEmprestado()"> Pedir emprestado </button>
+                    <button class="botao-detalhes-livro"  onclick ="verDetalhes(${index})">Mais detalhes</button>
+                </div>
+            `
+                            })
+
+                            listaLivros.innerHTML = htmlLivros
+                        })
+                }
+            }).catch(function (erro) {
+                console.log(erro)
+            })
+    }
+
+    function pedirEmprestado() {
+
+        Swal.fire({
+            title: "Solicitação criada com sucesso!",
+            html: "O portador do livro entrará em contato via email cadastrado no site para tratar mais detalhes. Fique de olho!! ",
+            icon: "success",
+            color: "#000",
+            confirmButtonColor: "#155d9c",
+            background: "#f4f6fa"
+        });
+
+
+
+    }
+
+    function verDetalhes(indiceLivro) {
+        var livroDetalhes = livros[indiceLivro]
+
+        modalDetalhesLivro.innerHTML = `
+        <button class="fechar" onclick="modalDetalhesLivro.close()">X</button>
+        <div>
+
+            <p class="titulo">${livroDetalhes.titulo}</p>
+
+            <p class="autor">${livroDetalhes.autor}</p>
+
+            <div class="detalhes-adicionais">
+                <p>Editora:
+                    <br>
+                    <span>${livroDetalhes.editora}</span>
+                </p>
+
+                <p>Data de publicação:
+                    <br> <span>${new Date(livroDetalhes.data_publicacao).toLocaleDateString("pt-br")}</span>
+                </p>
+
+                <p>Gênero:
+                    <br>
+                    <span>${livroDetalhes.genero}</span>
+                </p>
+            </div>
+
+            <p class="descricao">${livroDetalhes.descricao}</p>
+        </div>
+
+        <img src="${livroDetalhes.url_capa}">
+`
+        modalDetalhesLivro.showModal()
+    }
+
+</script>

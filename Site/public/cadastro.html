@@ -21,6 +21,23 @@
 
 <body>
 
+    <nav>
+        <ul class="navLinks">
+            <li><a href="#container">Home</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#faq">Dúvidas</a></li>
+            <li><a href="catalogo.html">Catálogo</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+        </ul>
+
+        <div id="botoesAutenticaoNav">
+            <a class="entrar" href="login.html">Entrar</a>
+            <a class="fazerParte" href="cadastro.html">Faça parte</a>
+        </div>
+
+        <div id="usuarioLogadoNav"></div>
+    </nav>
+
     <div class="container">
 
         <div class="ContainerEsquerdo">
@@ -31,7 +48,7 @@
             <p class="nomeAutor"> Anne Lamott.</p>
 
 
-            <img src="/Site/assets/bibliophile-bro.svg" alt="">
+            <img src="/assets/bibliophile-bro.svg" alt="">
         </div>
 
 
@@ -85,7 +102,7 @@
                 <option value="Outros">📚 Outros</option>
             </select>
 
-            <button class="botao-cadastrar"  onclick="validar()">Fazer Parte!</button>
+            <button class="botao-cadastrar" onclick="validar()">Fazer Parte!</button>
             <span>Já possui uma conta? <a href="Login.html"> Clique aqui!</a>
             </span>
 

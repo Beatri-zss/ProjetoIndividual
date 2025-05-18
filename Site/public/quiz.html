@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../css/quiz.css" />
     <link rel="stylesheet" href="../css/style.css" />
 
+    <script src="js/sessao.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,17 +17,22 @@
       rel="stylesheet"
     />
   </head>
-  <body onload="carregarPergunta()">
+  <body onload="validarSessao(), carregarPergunta()">
     <nav>
-      <ul class="navLinks">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="home.html">Dashboard</a></li>
-        <li><a href="home.html">Dúvidas</a></li>
-        <li><a href="catalogo.html">Catálogo</a></li>
-        <li><a href="#">Quiz</a></li>
-      </ul>
-      <a class="entrar" href="login.html">Entrar</a>
-      <a class="fazerParte" href="cadastro.html">Faça parte</a>
+        <ul class="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="index.html">Dúvidas</a></li>
+            <li><a href="catalogo.html">Catálogo</a></li>
+            <li><a href="#">Quiz</a></li>
+        </ul>
+
+        <div id="botoesAutenticaoNav">
+            <a class="entrar" href="login.html">Entrar</a>
+            <a class="fazerParte" href="cadastro.html">Faça parte</a>
+        </div>
+
+        <div id="usuarioLogadoNav"></div>
     </nav>
 
     <div class="container">

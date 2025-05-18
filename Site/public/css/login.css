@@ -1,10 +1,9 @@
 .container {
     display: flex;
     align-items: center;
-    max-height: 100vh;
-    height: 100vh;
+    height: 85vh;
     padding: 40px;
-    column-gap: 35px;
+    column-gap: 50px;
 }
 
 .ContainerEsquerdo {
@@ -26,7 +25,6 @@
 
 .citacao {
     text-align: justify;
-    margin-top: 40px;
     line-height: 35px;
 }
 
@@ -36,11 +34,11 @@
 }
 
 img {
-    width: 70%;
+    width: 65%;
 }
 
 .formulario {
-    max-width: 800px;
+    max-width: 600px;
     justify-self: center;
     flex-grow: 1;
     margin: 0 auto;
@@ -74,19 +72,20 @@ input {
 
 .botao-entrar {
     display: block;
-    width: 50%;
+    width: 60%;
     margin: 35px auto 10px;
     border-radius: 15px;
     padding: 15px;
     border: none;
     color: var(--branco);
-    background: linear-gradient(to right, hsla(208, 76%, 35%, 1) 25%, hsla(236, 47%, 27%, 1) 80%);
+    background: linear-gradient(to right, #155e9d 25%, #242965 80%);
     font-size: 20px;
     cursor: pointer;
     position: relative;
     z-index: 1;
     overflow: hidden;
 }
+
 .botao-entrar:before {
     content: "";
     position: absolute;
