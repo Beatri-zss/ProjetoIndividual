@@ -83,7 +83,7 @@ input, select {
     width: 100%;
 }
 
-button {
+.botao-cadastrar{
     display: block;
     width: 50%;
     margin: 35px auto 10px;
@@ -99,7 +99,7 @@ button {
     z-index: 2;
 }
 
-button:before {
+.botao-cadastrar:before {
     content: "";
     position: absolute;
     top: 100%;
@@ -111,7 +111,7 @@ button:before {
     z-index: -1;
 }
 
-button:hover:before {
+.botao-cadastrar:hover:before {
     top: 0;
 }
 

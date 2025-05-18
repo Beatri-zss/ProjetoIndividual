@@ -14,6 +14,9 @@
         href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
         rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+
 </head>
 
 <body>
@@ -82,7 +85,7 @@
                 <option value="Outros">📚 Outros</option>
             </select>
 
-            <button onli="validacao()">Fazer Parte!</button>
+            <button class="botao-cadastrar"  onclick="validar()">Fazer Parte!</button>
             <span>Já possui uma conta? <a href="Login.html"> Clique aqui!</a>
             </span>
 
@@ -94,7 +97,7 @@
 
 <script>
 
-    function validacao(){
+    function validar() {
 
         var nome = inputNome.value;
         var sobrenome = inputSobrenome.value;
@@ -102,22 +105,66 @@
         var email = inputEmail.value;
         var senha = inputSenha.value;
         var confirmarSenha = inputSenhaConfirmar.value;
+        var generoFavorito = selectGenero.value
+        var mensagemError = ""
 
 
 
 
-        if(
+        if (
             nome == "" ||
             sobrenome == "" ||
             telefone == "" ||
             email == "" ||
             senha == "" ||
-            confirmarSenha == "" ){
-                alert("mensagem de erro para todos os campos vazios")
+            confirmarSenha == "" ||
+            generoFavorito == "") {
 
-                    }
+            mensagemError = "Preencha todos os campos para prosseguir."
 
-       
+        }
+        else {
+            if (nome.length < 3) {
+                mensagemError += "Nome precisa ter no mínimo 3 caracteres. <br>"
+            }
+
+            if (sobrenome.length < 3) {
+                mensagemError += "Sobrenome precisa ter no mínimo 3 caracteres. <br>"
+            }
+
+            if (telefone.length != 11) {
+                mensagemError += "Informe um telefone válido! <br>"
+            }
+
+            if (!email.includes("@") || email.length < 5) {
+
+                mensagemError += " Informe um e-mail válido! <br>"
+            }
+
+            if (senha.length < 5) {
+
+                mensagemError += " Senha deve ter pelo menos 5 caracteres. <br>"
+
+            }
+            if (confirmarSenha != senha) {
+                mensagemError += "Senhas não correspondentes."
+            }
+
+
+        }
+
+        if (mensagemError != "") {
+
+            Swal.fire({
+                title: "Não foi possível realizar o Cadastro!",
+                html: mensagemError,
+                icon: "error",
+                color: "#000",
+                confirmButtonColor: "#155d9c",
+                background: "#f4f6fa"
+            });
+            return false;
+        }
 
 
     }

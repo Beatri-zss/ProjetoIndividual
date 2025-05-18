@@ -13,6 +13,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
         rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </head>
 
 <body>
@@ -20,7 +23,8 @@
     <div class="container">
 
         <div class="ContainerEsquerdo">
-            <p class="citacao">"A literatura não salva vidas da maneira como os médicos o fazem, mas salva de outra forma: ela amplia a
+            <p class="citacao">"A literatura não salva vidas da maneira como os médicos o fazem, mas salva de outra
+                forma: ela amplia a
                 consciência, provoca empatia, dá nome ao indizível. Um bom livro pode ser o começo de uma revolução
                 interna."
             </p>
@@ -40,32 +44,49 @@
                 <input type="text" id="inputSenha">
             </div>
 
-            <button onclick="validar()">Entrar</button>
+            <button class="botao-entrar" onclick="validar()">Entrar</button>
             <span>Ainda não possui uma conta? <a href="cadastro.html"> Clique aqui!</a>
             </span>
 
         </div>
     </div>
 </body>
+
 </html>
 <script>
 
- function validar(){
+    function validar() {
 
-    var email = inputEmail.value;
-    var senha = inputSenha.value;
+        var email = inputEmail.value;
+        var senha = inputSenha.value;
+        var mensagemError = ""
 
-    if(!email.includes("@")){
-        alert("email inválido")
+        if (!email.includes("@") || email.length < 5) {
+
+            mensagemError = "Email inválido! <br>"
+        }
+
+        if (senha.length < 5) {
+
+            mensagemError += " Senha deve ter pelo menos 5 caracteres."
+
+        }
+
+        if (mensagemError != "") {
+
+            Swal.fire({
+                title: "Não foi possível realizar o login!",
+                html: mensagemError,
+                icon: "error",
+                color: "#000",
+                confirmButtonColor: "#155d9c",
+                background: "#f4f6fa"
+            });
+            return false;
+        }
+
+
     }
-    
-    else if(senha.length < 5){
-        alert("senha deve ter pelo menos 5 caracteres ")
-    }
-
-
-
- }
 
 
 </script>

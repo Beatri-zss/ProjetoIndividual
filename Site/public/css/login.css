@@ -72,7 +72,7 @@ input {
     width: 100%;
 }
 
-button {
+.botao-entrar {
     display: block;
     width: 50%;
     margin: 35px auto 10px;
@@ -87,8 +87,7 @@ button {
     z-index: 1;
     overflow: hidden;
 }
-
-button:before {
+.botao-entrar:before {
     content: "";
     position: absolute;
     top: 100%;
@@ -100,7 +99,7 @@ button:before {
     z-index: -1;
 }
 
-button:hover:before {
+.botao-entrar:hover:before {
     top: 0;
 }
 
@@ -114,4 +113,5 @@ span {
 a {
     color: var(--amarelo);
     text-decoration: none;
-}
+} 
+
