@@ -9,7 +9,7 @@
 
 }
 
-.container-perguntas {
+.container-esquerdo {
     width: 550px;
     text-wrap: balance;
 }
@@ -26,7 +26,7 @@
     margin-bottom: 50px;
 }
 
-.container-perguntas .barraProgresso{
+#barraProgresso{
     width: 80%;
     height: 20px;
     padding: 5px;
@@ -34,7 +34,7 @@
     background-color: #fff;                                                                                                                                                            ;
 }
 
-.container-perguntas .barraProgresso #preenchimento {
+#barraProgresso div {
     height: 100%;
     width: var(--largura, 10%);
     border-radius: 999px;
@@ -42,7 +42,7 @@
     transition: width 0.3s;
 }
 
-.container-respostas {
+#containerRespostas {
     width: 565px;
 }
 
@@ -92,7 +92,54 @@
     font-size: 28px;
 }
 
-.container-respostas #botaoProximaPergunta:disabled {
+#botaoProximaPergunta:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+}
+
+#resultadoTexto {
+    font-size: 40px;
+    color: #626c7f;
+    display: none;
+}
+
+#resultadoTexto strong {
+    font-size: 55px;
+    color: #242965;
+}
+
+#containerResultado {
+    display: none;
+}
+
+#containerResultado .card {
+    width: 565px;
+    padding: 40px;
+    text-align: center;
+    background: #fff;
+    border-radius: 24px;
+    margin-bottom: 20px;
+}
+
+#containerResultado .totalAcertos {
+    display: block;
+    font-size: 100px;
+    color: #242965;
+    margin-bottom: 20px;
+}
+
+#containerResultado .totalPossivel {
+    font-size: 25px;
+    color: #626c7f;
+}
+
+#containerResultado a {
+    width: 100%;
+    text-align: center;
+    display: block;
+    color: #fff;
+    padding: 30px;
+    font-size: 22px;
+    border-radius: 24px;
+    background-color: var(--azul);
 }

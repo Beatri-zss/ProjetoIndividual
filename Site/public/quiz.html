@@ -1,83 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quiz</title>
+    <link rel="stylesheet" href="../css/quiz.css" />
+    <link rel="stylesheet" href="../css/style.css" />
 
-  <link rel="stylesheet" href="../css/quiz.css" />
-  <link rel="stylesheet" href="../css/style.css" />
+    <script src="js/sessao.js"></script>
 
-  <script src="js/sessao.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
+      rel="stylesheet" />
+  </head>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
-    rel="stylesheet" />
-</head>
+  <body onload="validarSessao(), carregarPerguntas()">
+    <nav>
+      <ul class="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="index.html">Dúvidas</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="#">Quiz</a></li>
+      </ul>
 
-<body onload="validarSessao(), carregarPerguntas()">
-  <nav>
-    <ul class="navLinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html">Dashboard</a></li>
-      <li><a href="index.html">Dúvidas</a></li>
-      <li><a href="catalogo.html">Catálogo</a></li>
-      <li><a href="#">Quiz</a></li>
-    </ul>
-
-    <div id="botoesAutenticaoNav">
-      <a class="entrar" href="login.html">Entrar</a>
-      <a class="fazerParte" href="cadastro.html">Faça parte</a>
-    </div>
-
-    <div id="usuarioLogadoNav"></div>
-  </nav>
-
-  <div class="container">
-
-    <div class="container-perguntas">
-      <p id="contadorPergunta">Questão 1 de 10</p>
-      <p id="pergunta">Quem é o pai de Percy Jackson?</p>
-      <div class="barraProgresso">
-        <div id="preenchimento"></div>
+      <div id="botoesAutenticaoNav">
+        <a class="entrar" href="login.html">Entrar</a>
+        <a class="fazerParte" href="cadastro.html">Faça parte</a>
       </div>
-    </div>
 
-    <div class="container-respostas">
-      <div id="respostas"></div>
-      <button id="botaoProximaPergunta" onclick="proximaPergunta()" disabled>Próxima Pergunta</button>
-    </div>
-  </div>
-</body>
+      <div id="usuarioLogadoNav"></div>
+    </nav>
 
+    <div class="container">
+      <div class="container-esquerdo">
+        <p id="contadorPergunta">Questão 1 de 10</p>
+        <p id="pergunta">Quem é o pai de Percy Jackson?</p>
+        <div id="barraProgresso">
+          <div id="#preenchimento"></div>
+        </div>
+
+        <p id="resultadoTexto">
+          Quiz finalizado <br />
+          <strong>Você acertou...</strong>
+        </p>
+      </div>
+
+      <div id="containerRespostas">
+        <div id="respostas"></div>
+        <button id="botaoProximaPergunta" onclick="proximaPergunta()" disabled>
+          Próxima Pergunta
+        </button>
+      </div>
+
+      <div id="containerResultado"></div>
+    </div>
+  </body>
 </html>
 
 <script>
   var contagemPerguntas = 1;
-  var contadorAcertos = 0
-  var perguntas = []
+  var contadorAcertos = 0;
+  var perguntas = [];
 
   function carregarPerguntas() {
-
     fetch("/quiz/perguntas")
       .then(function (resultado) {
-        console.log(resultado)
+        console.log(resultado);
         if (resultado.ok) {
-          resultado.json()
-            .then(function (json) {
-              perguntas = json
-              exibirPergunta()
-            })
+          resultado.json().then(function (json) {
+            perguntas = json;
+            exibirPergunta();
+          });
         }
       })
       .catch(function (erro) {
-        console.log(erro)
-      })
-
-
+        console.log(erro);
+      });
   }
 
   function exibirPergunta() {
@@ -109,32 +111,58 @@
     var perguntaAtual = perguntas[contagemPerguntas - 1];
 
     if (perguntaAtual.respostaCorreta == alternativa) {
-      elementoClicado.classList.add("certo") // Adicionando a classe "certo" na alternativa clicada
-      contadorAcertos++
-    }
-    else {
-      elementoClicado.classList.add("errado") // Adicionando a classe "errado" na alternativa clicada
+      elementoClicado.classList.add("certo"); // Adicionando a classe "certo" na alternativa clicada
+      contadorAcertos++;
+    } else {
+      elementoClicado.classList.add("errado"); // Adicionando a classe "errado" na alternativa clicada
     }
 
     /* Desabilitando os botões de alternativas */
-    respostaA.disabled = true
-    respostaB.disabled = true
-    respostaC.disabled = true
-    respostaD.disabled = true
+    respostaA.disabled = true;
+    respostaB.disabled = true;
+    respostaC.disabled = true;
+    respostaD.disabled = true;
 
     /* Habilitando o botão para ir para a próxima pergunta */
-    botaoProximaPergunta.disabled = false
+    botaoProximaPergunta.disabled = false;
   }
 
   function proximaPergunta() {
-    contagemPerguntas++
-    exibirPergunta()
-    preenchimento.style.setProperty("--largura", contagemPerguntas * 10 + '%')
+    contagemPerguntas++;
 
-    /* Desabilitando o botão que vai para a próxima pergunta */
-    botaoProximaPergunta.disabled = true
+    if (contagemPerguntas <= perguntas.length) {
+      exibirPergunta();
+      preenchimento.style.width = `${contagemPerguntas * 10}%`;
 
-    // Atualizando texto da questão atual
-    contadorPergunta.innerHTML = `Questão ${contagemPerguntas} de ${perguntas.length}`
+      /* Desabilitando o botão que vai para a próxima pergunta */
+      botaoProximaPergunta.disabled = true;
+
+      // Atualizando contagem da questão atual
+      contadorPergunta.innerHTML = `Questão ${contagemPerguntas} de ${perguntas.length}`;
+    } 
+    else {
+      // Aqui o usuário finalizou o quiz
+
+      // escondendo elementos relacionados as perguntas
+      pergunta.style.display = "none";
+      barraProgresso.style.display = "none";
+      contadorPergunta.style.display = "none";
+      containerRespostas.style.display = "none";
+
+      // editando innerHTML do containerResultado para exibir o número de acertos do usuário
+      containerResultado.innerHTML = `
+        <div class="card">
+          <span class="totalAcertos">${contadorAcertos}</span>
+          <span class="totalPossivel">de 10</span>
+        </div>
+
+        <a href="dashboard.html">Ver minhas estatísticas</a>`;
+
+      // exibindo elemento de resultado
+      resultadoTexto.style.display = "block";
+      containerResultado.style.display = "block";
+
+      // enviar resultado para o banco de dados
+    }
   }
 </script>
