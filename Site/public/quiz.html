@@ -13,16 +13,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap"
       rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
   </head>
 
-  <body onload="validarSessao(), carregarPerguntas()">
+  <body onload="validarUsuarioLogado(), validarSessao(), carregarPerguntas()">
     <nav>
       <ul class="navLinks">
         <li><a href="index.html">Home</a></li>
         <li><a href="index.html">Dashboard</a></li>
-        <li><a href="index.html">Dúvidas</a></li>
+        <li><a href="index.html#faq">Dúvidas</a></li>
         <li><a href="catalogo.html">Catálogo</a></li>
         <li><a href="#">Quiz</a></li>
       </ul>
@@ -40,7 +43,7 @@
         <p id="contadorPergunta">Questão 1 de 10</p>
         <p id="pergunta">Quem é o pai de Percy Jackson?</p>
         <div id="barraProgresso">
-          <div id="#preenchimento"></div>
+          <div id="preenchimento"></div>
         </div>
 
         <p id="resultadoTexto">
@@ -88,27 +91,28 @@
     pergunta.innerHTML = perguntaAtual.enunciado;
 
     respostas.innerHTML = `
-        <button class="resposta" id="respostaA" onclick="responder('alternativaA', this)">
+        <button class="resposta" id="respostaA" onclick="responder('alternativaA', respostaA)">
             <span> A </span>
             <p> ${perguntaAtual.alternativaA} </p>
         </button>
-        <button class="resposta" id="respostaB" onclick="responder('alternativaB', this)">
+        <button class="resposta" id="respostaB" onclick="responder('alternativaB', respostaB)">
             <span> B </span>
             <p> ${perguntaAtual.alternativaB} </p>
         </button>
-        <button class="resposta" id="respostaC" onclick="responder('alternativaC', this)">
+        <button class="resposta" id="respostaC" onclick="responder('alternativaC', respostaC)">
             <span> C </span>
             <p> ${perguntaAtual.alternativaC} </p>
         </button>
-        <button class="resposta" id="respostaD" onclick="responder('alternativaD', this)">
+        <button class="resposta" id="respostaD" onclick="responder('alternativaD', respostaD)">
             <span> D </span>
             <p> ${perguntaAtual.alternativaD} </p>
         </button>
     `;
   }
 
-  function responder(alternativa, elementoClicado) {
+  function responder(alternativa, idElementoClicado) {
     var perguntaAtual = perguntas[contagemPerguntas - 1];
+    var elementoClicado = document.getElementById(idElementoClicado)
 
     if (perguntaAtual.respostaCorreta == alternativa) {
       elementoClicado.classList.add("certo"); // Adicionando a classe "certo" na alternativa clicada
@@ -152,8 +156,9 @@
       // editando innerHTML do containerResultado para exibir o número de acertos do usuário
       containerResultado.innerHTML = `
         <div class="card">
-          <span class="totalAcertos">${contadorAcertos}</span>
-          <span class="totalPossivel">de 10</span>
+          <p class="totalAcertos"> 
+            ${contadorAcertos} <span class="totalPossivel"> / 10 </span>
+          </p>
         </div>
 
         <a href="dashboard.html">Ver minhas estatísticas</a>`;

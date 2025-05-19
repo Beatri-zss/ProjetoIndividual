@@ -36,7 +36,7 @@
 
 #barraProgresso div {
     height: 100%;
-    width: var(--largura, 10%);
+    width: 10%;
     border-radius: 999px;
     background-color: #155d9c;
     transition: width 0.3s;
@@ -122,14 +122,12 @@
 }
 
 #containerResultado .totalAcertos {
-    display: block;
     font-size: 100px;
     color: #242965;
-    margin-bottom: 20px;
 }
 
 #containerResultado .totalPossivel {
-    font-size: 25px;
+    font-size: 40px;
     color: #626c7f;
 }
 
