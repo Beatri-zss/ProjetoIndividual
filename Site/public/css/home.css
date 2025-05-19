@@ -107,6 +107,7 @@ span {
 }
 
 #faq {
+    height: 100vh;
     padding: 30px var(--padding-horizontal-padrao);
 }
 
@@ -130,7 +131,7 @@ span {
 
 .paragrafo1 {
     font-size: 24px;            
-    margin-bottom: 30px;
+    margin-bottom: 60px;
     text-align: center;
     color: #050E50;
 }
@@ -143,8 +144,6 @@ span {
     width: 100%;
     margin-bottom: 10px;
 }
-
-
 
 .faq li label {
     font-size: 24px;
