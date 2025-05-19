@@ -1,134 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz</title>
 
-    <link rel="stylesheet" href="../css/quiz.css" />
-    <link rel="stylesheet" href="../css/style.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz</title>
 
-    <script src="js/sessao.js"></script>
+  <link rel="stylesheet" href="../css/quiz.css" />
+  <link rel="stylesheet" href="../css/style.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body onload="validarSessao(), carregarPergunta()">
-    <nav>
-        <ul class="navLinks">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html">Dashboard</a></li>
-            <li><a href="index.html">Dúvidas</a></li>
-            <li><a href="catalogo.html">Catálogo</a></li>
-            <li><a href="#">Quiz</a></li>
-        </ul>
+  <script src="js/sessao.js"></script>
 
-        <div id="botoesAutenticaoNav">
-            <a class="entrar" href="login.html">Entrar</a>
-            <a class="fazerParte" href="cadastro.html">Faça parte</a>
-        </div>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
+    rel="stylesheet" />
+</head>
 
-        <div id="usuarioLogadoNav"></div>
-    </nav>
+<body onload="validarSessao(), carregarPerguntas()">
+  <nav>
+    <ul class="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html">Dashboard</a></li>
+      <li><a href="index.html">Dúvidas</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="#">Quiz</a></li>
+    </ul>
 
-    <div class="container">
+    <div id="botoesAutenticaoNav">
+      <a class="entrar" href="login.html">Entrar</a>
+      <a class="fazerParte" href="cadastro.html">Faça parte</a>
+    </div>
 
-      <div class="container-perguntas">
-        <p id="contadorPergunta">Questão 1 de 10</p>
-        <p id="pergunta">Quem é o pai de Percy Jackson?</p>
-        <div class="barraProgresso">
-          <div id="preenchimento"></div>
-        </div>
-      </div>
+    <div id="usuarioLogadoNav"></div>
+  </nav>
 
-      <div class="container-respostas">
-        <div id="respostas"></div>
-        <button id="botaoProximaPergunta" onclick="proximaPergunta()" disabled>Próxima Pergunta</button>
+  <div class="container">
+
+    <div class="container-perguntas">
+      <p id="contadorPergunta">Questão 1 de 10</p>
+      <p id="pergunta">Quem é o pai de Percy Jackson?</p>
+      <div class="barraProgresso">
+        <div id="preenchimento"></div>
       </div>
     </div>
-  </body>
+
+    <div class="container-respostas">
+      <div id="respostas"></div>
+      <button id="botaoProximaPergunta" onclick="proximaPergunta()" disabled>Próxima Pergunta</button>
+    </div>
+  </div>
+</body>
+
 </html>
 
 <script>
   var contagemPerguntas = 1;
   var contadorAcertos = 0
-  var perguntas = [
-    {
-      enunciado: 'Quem escreveu o livro "Dom Quixote"?',
-      A: "Jorge Amado",
-      B: "Jane Austen",
-      C: "Machado de Assis",
-      D: "Miguel de Cervantes",
-      respostaCorreta: "D",
-    },
-    {
-      enunciado: 'Quem é o autor do livro "O Pequeno Príncipe"?',
-      A: "Neil Gaiman",
-      B: "George Orwell",
-      C: "Antoine de Saint-Exupéry",
-      D: "Charles Dickens",
-      respostaCorreta: "C",
-    },
-    {
-      enunciado: 'Quem é o autor do livro "Dom Casmurro"?',
-      A: "Machado de Assis",
-      B: "Graciliano Ramos",
-      C: "Stefano Volp",
-      D: "Ligia Fagundes Teles",
-      respostaCorreta: "A",
-    },
-    {
-      enunciado:
-        "De qual livro esse trecho pertence: “Quando Gregor Samsa acordou uma manhã de sonhos inquietos, viu-se transformado em sua cama num inseto gigantesco”?",
-      A: "Crime e Castigo",
-      B: "A Metamorfose",
-      C: "As viagens de Gulliver",
-      D: "Harry Potter e o Prisioneiro de Azkaban",
-      respostaCorreta: "B",
-    },
-    {
-      enunciado: "Percy Jackson é filho de qual Deus?",
-      A: "Hermes",
-      B: "Zeus",
-      C: "Poseidon",
-      D: "Hades",
-      respostaCorreta: "C",
-    },
-  ];
+  var perguntas = []
 
-  function carregarPergunta() {
+  function carregarPerguntas() {
+
+    fetch("/quiz/perguntas")
+      .then(function (resultado) {
+        console.log(resultado)
+        if (resultado.ok) {
+          resultado.json()
+            .then(function (json) {
+              perguntas = json
+              exibirPergunta()
+            })
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro)
+      })
+
+
+  }
+
+  function exibirPergunta() {
     var perguntaAtual = perguntas[contagemPerguntas - 1];
 
     pergunta.innerHTML = perguntaAtual.enunciado;
 
     respostas.innerHTML = `
-        <button class="resposta" id="respostaA" onclick="responder('A', this)">
+        <button class="resposta" id="respostaA" onclick="responder('alternativaA', this)">
             <span> A </span>
-            <p> ${perguntaAtual.A} </p>
+            <p> ${perguntaAtual.alternativaA} </p>
         </button>
-        <button class="resposta" id="respostaB" onclick="responder('B', this)">
+        <button class="resposta" id="respostaB" onclick="responder('alternativaB', this)">
             <span> B </span>
-            <p> ${perguntaAtual.B} </p>
+            <p> ${perguntaAtual.alternativaB} </p>
         </button>
-        <button class="resposta" id="respostaC" onclick="responder('C', this)">
+        <button class="resposta" id="respostaC" onclick="responder('alternativaC', this)">
             <span> C </span>
-            <p> ${perguntaAtual.C} </p>
+            <p> ${perguntaAtual.alternativaC} </p>
         </button>
-        <button class="resposta" id="respostaD" onclick="responder('D', this)">
+        <button class="resposta" id="respostaD" onclick="responder('alternativaD', this)">
             <span> D </span>
-            <p> ${perguntaAtual.D} </p>
+            <p> ${perguntaAtual.alternativaD} </p>
         </button>
     `;
   }
 
-  function responder(alternativa, elementoClicado){
+  function responder(alternativa, elementoClicado) {
     var perguntaAtual = perguntas[contagemPerguntas - 1];
-    
-    if(perguntaAtual.respostaCorreta == alternativa){
+
+    if (perguntaAtual.respostaCorreta == alternativa) {
       elementoClicado.classList.add("certo") // Adicionando a classe "certo" na alternativa clicada
       contadorAcertos++
     }
@@ -148,7 +128,7 @@
 
   function proximaPergunta() {
     contagemPerguntas++
-    carregarPergunta()
+    exibirPergunta()
     preenchimento.style.setProperty("--largura", contagemPerguntas * 10 + '%')
 
     /* Desabilitando o botão que vai para a próxima pergunta */
