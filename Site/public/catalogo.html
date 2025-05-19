@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Catalogo</title>
 
     <link rel="stylesheet" href="../css/catalogo.css" />
@@ -14,101 +13,111 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
-        rel="stylesheet" />
+      href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
+      rel="stylesheet" />
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-</head>
+  </head>
 
-<body onload="validarSessao(), carregarCatalogo()">
+  <body onload="validarSessao(), carregarCatalogo()">
     <nav>
-        <ul class="navLinks">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html">Dashboard</a></li>
-            <li><a href="index.html">Dúvidas</a></li>
-            <li><a href="#">Catálogo</a></li>
-            <li><a href="quiz.html">Quiz</a></li>
-        </ul>
+      <ul class="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="index.html">Dúvidas</a></li>
+        <li><a href="#">Catálogo</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+      </ul>
 
-        <div id="botoesAutenticaoNav">
-            <a class="entrar" href="login.html">Entrar</a>
-            <a class="fazerParte" href="cadastro.html">Faça parte</a>
-        </div>
+      <div id="botoesAutenticaoNav">
+        <a class="entrar" href="login.html">Entrar</a>
+        <a class="fazerParte" href="cadastro.html">Faça parte</a>
+      </div>
 
-        <div id="usuarioLogadoNav"></div>
+      <div id="usuarioLogadoNav"></div>
     </nav>
 
     <div class="container">
-        <div id="listaLivros">
-
-        </div>
+      <div id="listaLivros"></div>
     </div>
 
     <dialog id="modalDetalhesLivro"></dialog>
-</body>
-
+  </body>
 </html>
-<script> 
-    var livros = []
+<script>
+  var livros = [];
 
-    function carregarCatalogo() {
-        var htmlLivros = "";
+  function carregarCatalogo() {
+    var htmlLivros = "";
 
-        fetch("/livros/listar")
-            .then(function (resultado) {
-                console.log(resultado)
+    fetch("/livros/listar")
+      .then(function (resultado) {
+        console.log(resultado);
 
-                if (resultado.ok) {
-                    resultado.json()
-                        .then(function (json) {
-                            livros = json
+        if (resultado.ok) {
+          resultado.json().then(function (json) {
+            livros = json;
 
-                            json.forEach((livro, index) => {
-                                var classeIndisponivel = ""
+            json.forEach((livro, index) => {
+              var classeIndisponivel = "";
 
-                                if (livro.disponivel == false) {
-                                    classeIndisponivel = "indisponivel"
-                                }
+              if (livro.disponivel == false) {
+                classeIndisponivel = "indisponivel";
+              }
 
-                                htmlLivros +=
-                                    `
+              htmlLivros += `
                 <div class="livro ${classeIndisponivel}">
                     <img src="${livro.url_capa}">
                     <p>${livro.titulo}</p>
                     <button class="botao-emprestar"  onclick="pedirEmprestado()"> Pedir emprestado </button>
                     <button class="botao-detalhes-livro"  onclick ="verDetalhes(${index})">Mais detalhes</button>
                 </div>
-            `
-                            })
+            `;
+            });
 
-                            listaLivros.innerHTML = htmlLivros
-                        })
-                }
-            }).catch(function (erro) {
-                console.log(erro)
-            })
+            listaLivros.innerHTML = htmlLivros;
+          });
+        }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+      });
+  }
+
+  function pedirEmprestado() {
+    if (sessionStorage.ID_USUARIO == undefined) {
+      Swal.fire({
+        title: 'Erro ao solicitar empréstimo!',
+        html: 'Você deve estar logado para solicitar um empréstimo.',
+        icon: 'error',
+        showCloseButton: true,
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: "#155d9c",
+        confirmButtonText: '<a href="login.html">Fazer login</a>'
+
+      });
+    } else {
+        // Se usuário está logado fazer solicitação
+
+      Swal.fire({
+        title: "Solicitação criada com sucesso!",
+        html: "O portador do livro entrará em contato via email cadastrado no site para tratar mais detalhes. Fique de olho!! ",
+        icon: "success",
+        iconColor: '#155d9c',
+        color: "#000",
+        showCloseButton: true,
+        confirmButtonColor: "#155d9c",
+        background: "#f4f6fa",
+      });
     }
+  }
 
-    function pedirEmprestado() {
+  function verDetalhes(indiceLivro) {
+    var livroDetalhes = livros[indiceLivro];
 
-        Swal.fire({
-            title: "Solicitação criada com sucesso!",
-            html: "O portador do livro entrará em contato via email cadastrado no site para tratar mais detalhes. Fique de olho!! ",
-            icon: "success",
-            color: "#000",
-            confirmButtonColor: "#155d9c",
-            background: "#f4f6fa"
-        });
-
-
-
-    }
-
-    function verDetalhes(indiceLivro) {
-        var livroDetalhes = livros[indiceLivro]
-
-        modalDetalhesLivro.innerHTML = `
+    modalDetalhesLivro.innerHTML = `
         <button class="fechar" onclick="modalDetalhesLivro.close()">X</button>
         <div>
 
@@ -136,8 +145,7 @@
         </div>
 
         <img src="${livroDetalhes.url_capa}">
-`
-        modalDetalhesLivro.showModal()
-    }
-
+`;
+    modalDetalhesLivro.showModal();
+  }
 </script>
