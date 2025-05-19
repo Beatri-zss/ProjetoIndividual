@@ -120,3 +120,7 @@ dialog::backdrop {
     height: 350px;
     border-radius: 10px;
 }
+
+.swal2-actions .swal2-confirm a:visited {
+    color: #fff;
+} 
