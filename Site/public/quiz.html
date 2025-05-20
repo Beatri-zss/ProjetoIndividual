@@ -168,6 +168,25 @@
       containerResultado.style.display = "block";
 
       // enviar resultado para o banco de dados
+      fetch("/quiz/salvarResultado", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idUsuario: sessionStorage.ID_USUARIO,
+          pontuacao: contadorAcertos,
+        }),
+      }).catch((erro) => {
+        Swal.fire({
+          title: "Erro ao salvar o resultado do quiz!",
+          html: "Ocorreu um erro inesperado, tente novamente depois!",
+          icon: "error",
+          showCloseButton: true,
+          confirmButtonColor: "#155d9c",
+          confirmButtonText: '<a href="dashboard.html">Ok</a>',
+        });
+      });
     }
   }
 </script>
