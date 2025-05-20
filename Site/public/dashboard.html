@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <script src="js/sessao.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  </head>
+
+  <body onload="validarUsuarioLogado(), validarSessao()">
+    <nav>
+      <ul class="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#faq">Dúvidas</a></li>
+        <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+      </ul>
+
+      <div id="botoesAutenticaoNav">
+        <a class="entrar" href="login.html">Entrar</a>
+        <a class="fazerParte" href="cadastro.html">Faça parte</a>
+      </div>
+
+      <div id="usuarioLogadoNav"></div>
+    </nav>
+
+    <div id="dashboard">
+      <ul class="kpisContainer">
+        <li class="kpi">
+          <p class="descricao">Média de duração dos seus empréstimos</p>
+          <p class="valor">6 dias</p>
+        </li>
+        <li class="kpi">
+          <p class="descricao">Quantidade de empréstimos feitos</p>
+          <p class="valor">5</p>
+        </li>
+        <li class="kpi">
+          <p class="descricao">Pontuação máxima no quiz</p>
+          <p class="valor">10</p>
+        </li>
+      </ul>
+
+      <div class="graficos-container">
+        <div class="grafico">
+          <canvas id="historicoTentativasQuiz"></canvas>
+        </div>
+
+        <div class="grafico-pizza">
+          <canvas id="generoFavoritoUsuarios"></canvas>
+        </div>
+
+        <div class="grafico">
+          <canvas id="generosMaisLidos"></canvas>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  new Chart(historicoTentativasQuiz, {
+    type: "line",
+    data: {
+      labels: [
+        "1° tentativa",
+        "2° tentativa",
+        "3° tentativa",
+        "4° tentativa",
+        "5° tentativa",
+        "6° tentativa",
+        "7° tentativa",
+      ],
+      datasets: [
+        {
+          min: 0,
+          label: "Pontuação",
+          data: [4, 6, 8, 9, 7, 10, 8],
+          fill: false,
+          borderColor: "#155d9c",
+          backgroundColor: "#155d9c",
+        },
+      ],
+    },
+    options: {
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        title: {
+          display: true,
+          text: "Histórico de pontuação do Quiz ",
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  new Chart(generosMaisLidos, {
+    type: "bar",
+    data: {
+      labels: ["Terror", "Romance", "Ficção científica", "Não-ficção"],
+      datasets: [
+        {
+          label: "Quantidade de livros lidos",
+          data: [1, 5, 2, 2],
+          backgroundColor: ["#90caf9", "#5dade2", "#64b5f6", "#42a5f5"],
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+            min: 0,
+            max: 8
+        }
+      }
+    },
+  });
+
+  new Chart(generoFavoritoUsuarios, {
+    type: "pie",
+    data: {
+      labels: [
+        "Terror",
+        "Romance",
+        "Aventura",
+        "Fantasia",
+        "Ficção Científica"
+      ],
+      datasets: [
+        {
+          label: "Contagem de usuários por gênero favorito",
+          data: [3, 8, 3, 4, 1],
+          backgroundColor: ["#555EB8", "#155d9c", "#FFC100", "#b5b5b5", "red"],
+          hoverOffset: 4,
+        },
+      ],
+    },
+  });
+</script>

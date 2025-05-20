@@ -24,9 +24,9 @@
     <nav>
       <ul class="navLinks">
         <li><a href="index.html">Home</a></li>
-        <li><a href="index.html">Dashboard</a></li>
         <li><a href="index.html#faq">Dúvidas</a></li>
         <li><a href="catalogo.html">Catálogo</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="#">Quiz</a></li>
       </ul>
 
@@ -91,19 +91,19 @@
     pergunta.innerHTML = perguntaAtual.enunciado;
 
     respostas.innerHTML = `
-        <button class="resposta" id="respostaA" onclick="responder('alternativaA', respostaA)">
+        <button class="resposta" id="respostaA" onclick="responder('alternativaA', 'respostaA')">
             <span> A </span>
             <p> ${perguntaAtual.alternativaA} </p>
         </button>
-        <button class="resposta" id="respostaB" onclick="responder('alternativaB', respostaB)">
+        <button class="resposta" id="respostaB" onclick="responder('alternativaB', 'respostaB')">
             <span> B </span>
             <p> ${perguntaAtual.alternativaB} </p>
         </button>
-        <button class="resposta" id="respostaC" onclick="responder('alternativaC', respostaC)">
+        <button class="resposta" id="respostaC" onclick="responder('alternativaC', 'respostaC')">
             <span> C </span>
             <p> ${perguntaAtual.alternativaC} </p>
         </button>
-        <button class="resposta" id="respostaD" onclick="responder('alternativaD', respostaD)">
+        <button class="resposta" id="respostaD" onclick="responder('alternativaD', 'respostaD')">
             <span> D </span>
             <p> ${perguntaAtual.alternativaD} </p>
         </button>

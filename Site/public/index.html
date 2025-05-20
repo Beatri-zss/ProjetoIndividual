@@ -25,9 +25,9 @@
     <nav>
         <ul class="navLinks">
             <li><a href="#container">Home</a></li>
-            <li><a href="#dashboard">Dashboard</a></li>
             <li><a href="#faq">Dúvidas</a></li>
             <li><a href="catalogo.html">Catálogo</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
             <li><a href="quiz.html">Quiz</a></li>
         </ul>
 
@@ -53,40 +53,9 @@
 
         <img class="imagem-pessoa-lendo-home" src="assets/pessoas-lendo.svg" alt="">
 
-        <a href="#dashboard" class="dashboard-link">
+        <a href="#faq" class="dashboard-link">
             <img src="/assets/flecha-baixo.svg" alt="">
         </a>
-    </div>
-
-    <div id="dashboard">
-        <ul class="kpisContainer">
-            <li class="kpi">
-                <p class="descricao">Gênero mais favoritado</p>
-                <p class="valor">Romance</p>
-            </li>
-            <li class="kpi">
-                <p class="descricao">Quantidade de livros</p>
-                <p class="valor">60</p>
-            </li>
-            <li class="kpi">
-                <p class="descricao">Empréstimos feitos</p>
-                <p class="valor">100</p>
-            </li>
-        </ul>
-       
-        <div class="graficos-container">
-            <div class="grafico">
-                <canvas id="percentualGenerosFavoritos"></canvas>
-            </div>
-            
-            <div class="grafico-pizza">
-                <canvas id="percentualDeEmprestimos"></canvas>
-            </div>
-            
-            <div class="grafico">
-                <canvas id="emprestimosUltimosMeses"></canvas>
-            </div>
-        </div>
     </div>
 
     <div id="faq">
@@ -183,88 +152,3 @@
     </div>
 </body>
 </html>
-<script>
-var respostaAPI = [2, 25, 10, 6, 20, 4, 9, 12, 14, 7]
-
-
-new Chart(percentualGenerosFavoritos, {
-    type: 'bar',
-    data: {
-        labels:[
-            'Terror', 'Romance', 'Ficção Científica', 'Distopia', 'Fantasia', 'Não-Ficção', 'Suspense', 'Mangá/HQ', 'Aventura', 'Outros'
-        ],
-        datasets: [
-            {
-            label: 'Quantidade por gênero',
-            data: respostaAPI,
-            fill: false,
-            backgroundColor: ['#90caf9', '#5dade2', '#64b5f6', '#42a5f5', '#1565c0', '#0d47a1']
-            }
-        ]
-}
-})
-
-new Chart(emprestimosUltimosMeses, {
-    type: 'bar',
-    data: {
-        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
-        datasets: [{
-            label: 'Quantidade de empréstimos no mês',
-            data: [1, 5, 10, 20, 16, 13, 7],
-            backgroundColor: ['#90caf9', '#5dade2', '#64b5f6', '#42a5f5', '#1565c0', '#0d47a1'],
-
-        }]
-    }
-})
-
-    new Chart(percentualDeEmprestimos,{
-
-        type:"pie",
-        data: {
-            labels:[
-                'Harry Potter e a Pedra Filosofal',
-                'Frankenstein',
-                'Boa noite Punpun vol 1',
-                'Outros'
-            ],
-            datasets:[{
-                label:'Percentual de livros mais emprestados',
-                data: [20, 16, 10, 54],
-                backgroundColor:[
-                   '#555EB8',
-                   '#155d9c',
-                   '#FFC100',
-                   '#b5b5b5'
-                ],
-                hoverOffset: 4
-            }]
-        },
-    })
-
-
-
-
-
-
-
-    // new Chart(livrosMaisAvaliados,{
-
-    //     type: "bar",
-    //     data:{
-    //         labels:[
-    //             'Romance',
-    //             'Ficção Cientifica'
-    //         ]
-    //         datasets:[
-    //             {
-    //                 label: 'Livros mais avaliados por gênero',
-    //                 data []
-    //             }
-    //         ]
-    //     }
-    
-    // })
-
-
-
-</script>

@@ -1,0 +1,59 @@
+#dashboard {
+  min-height: 91vh;
+  background-color: #f4f6fa;
+  padding: 30px var(--padding-horizontal-padrao);
+}
+
+.kpisContainer {
+  display: flex;
+  align-items: stretch;
+  gap: 30px;
+  justify-content: center;
+
+  margin-bottom: 30px;
+}
+
+.kpi {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  max-width: 255px;
+  text-wrap: balance;
+  text-align: center;
+  padding: 10px 20px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+
+.kpi .descricao {
+  font-size: 20px;
+  color: #050e50;
+}
+
+.kpi .valor {
+  font-size: 30px;
+  margin-top: 10px;
+  color: var(--amarelo);
+}
+
+.graficos-container {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  column-gap: 60px;
+}
+
+.grafico {
+  width: 525px;
+  margin: 0 auto;
+}
+
+.grafico-pizza {
+  width: 450px;
+  grid-row: 1/3;
+  grid-column: 2/3;
+  align-self: center;
+  justify-self: center;
+}
