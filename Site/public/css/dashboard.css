@@ -1,7 +1,7 @@
 #dashboard {
   min-height: 91vh;
   background-color: #f4f6fa;
-  padding: 30px var(--padding-horizontal-padrao);
+  padding: 20px var(--padding-horizontal-padrao);
 }
 
 .kpisContainer {
@@ -28,12 +28,12 @@
 }
 
 .kpi .descricao {
-  font-size: 20px;
+  font-size: 18px;
   color: #050e50;
 }
 
 .kpi .valor {
-  font-size: 30px;
+  font-size: 26px;
   margin-top: 10px;
   color: var(--amarelo);
 }
@@ -42,11 +42,12 @@
   display: grid;
   align-items: center;
   justify-content: center;
+  grid-template-columns: 1fr 1fr;
   column-gap: 60px;
 }
 
 .grafico {
-  width: 525px;
+  width: 550px;
   margin: 0 auto;
 }
 

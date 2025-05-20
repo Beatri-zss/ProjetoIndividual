@@ -121,19 +121,28 @@
       labels: ["Terror", "Romance", "Ficção científica", "Não-ficção"],
       datasets: [
         {
-          label: "Quantidade de livros lidos",
+          label: "Quantidade",
           data: [1, 5, 2, 2],
           backgroundColor: ["#90caf9", "#5dade2", "#64b5f6", "#42a5f5"],
         },
       ],
     },
     options: {
+      plugins: {
+        legend: {
+          position: "top",
+        },
+        title: {
+          display: true,
+          text: "Quantidade de livros lido por gênero",
+        },
+      },
       scales: {
         y: {
-            min: 0,
-            max: 8
-        }
-      }
+          min: 0,
+          max: 10,
+        },
+      },
     },
   });
 
@@ -145,7 +154,7 @@
         "Romance",
         "Aventura",
         "Fantasia",
-        "Ficção Científica"
+        "Ficção Científica",
       ],
       datasets: [
         {
