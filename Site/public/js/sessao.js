@@ -22,30 +22,17 @@ function limparSessao() {
 // Função usada em páginas onde o usuário deve estar logado para acessar
 function validarUsuarioLogado() {
     if(sessionStorage.ID_USUARIO == undefined){
-        // Exemplo de modal retirado de: https://sweetalert2.github.io/#timer-example
-        var timerInterval
-
         // Fechar automático ou esperar usuário clicar no botão?
         Swal.fire({
         title: 'Acesso negado!',
-        html: 'Você deve entrar na sua conta para acessar essa tela. <br> Você será redirecionado para a tela de login em <b></b> segundos',
+        html: 'Você deve entrar na sua conta para acessar essa tela!',
         icon: 'error',
-        timer: 4000, // Tempo até o modal fechar (Cada 1000 milisegundos = 1 segundo)
-        timerProgressBar: true,
         showCancelButton: true,
-        showConfirmButton: false,
+        showConfirmButton: true,
+        confirmButtonColor: '#155d9c',
         backdrop: 'rgba(0, 0, 0, 0.9)', // Fundo preto quando modal está aberto
         cancelButtonText: 'Cancelar',
-        didOpen: () => {
-            Swal.showLoading();
-            var timer = Swal.getPopup().querySelector("b");
-            timerInterval = setInterval(() => {
-                timer.textContext = `${Swal.getTimerLeft()}`
-            }, 1000)
-        },
-        willClose: () => {
-            clearInterval(timerInterval)
-        }
+        confirmButtonText: 'Ir para login'
       })
       .then(resultado => {
         if(resultado.dismiss == Swal.DismissReason.cancel){

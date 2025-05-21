@@ -87,7 +87,7 @@ span {
 }
 
 .paragrafo1 {
-    font-size: 24px;            
+    font-size: 24px;
     margin-bottom: 60px;
     text-align: center;
     color: #050E50;
@@ -109,6 +109,8 @@ span {
     color: #ffff;
     cursor: pointer;
     padding: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -138,6 +140,8 @@ span {
     line-height: 32px;
     max-height: 0;
     font-size: 22px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     /* isso faz com que a caixa que estava guardando as respostas encolha = respostas vazadas*/
     overflow: hidden;
     /* isso significa que tudo que ficar vazado da estrutura ficará escondido */
@@ -145,8 +149,7 @@ span {
 }
 
 .faq .resposta a,
-.faq .resposta a:visited
- {
+.faq .resposta a:visited {
     color: #ffffff;
     text-decoration: underline;
 }

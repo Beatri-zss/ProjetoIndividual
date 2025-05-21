@@ -70,8 +70,8 @@
                 <div class="livro ${classeIndisponivel}">
                     <img src="${livro.url_capa}">
                     <p>${livro.titulo}</p>
-                    <button class="botao-emprestar"  onclick="pedirEmprestado()"> Pedir emprestado </button>
-                    <button class="botao-detalhes-livro"  onclick ="verDetalhes(${index})">Mais detalhes</button>
+                    <button class="botao-emprestar" onclick="pedirEmprestado()"> Pedir emprestado </button>
+                    <button class="botao-detalhes-livro" onclick ="verDetalhes(${index})">Mais detalhes</button>
                 </div>
             `;
             });
@@ -89,13 +89,13 @@
     if (sessionStorage.ID_USUARIO == undefined) {
       Swal.fire({
         title: 'Erro ao solicitar empréstimo!',
-        html: 'Você deve entrar na sua conta para solicitar um empréstimo.',
+        text: 'Você deve entrar na sua conta para solicitar um empréstimo.',
         icon: 'error',
         showCloseButton: true,
         showCancelButton: true,
         cancelButtonText: 'Cancelar',
         confirmButtonColor: "#155d9c",
-        confirmButtonText: '<a href="login.html">Fazer login</a>'
+        confirmButtonText: '<a href="login.html">Ir para login</a>'
 
       });
     } else {
@@ -103,13 +103,12 @@
 
       Swal.fire({
         title: "Solicitação criada com sucesso!",
-        html: "O portador do livro entrará em contato via email cadastrado no site para tratar mais detalhes. Fique de olho!! ",
+        html: "O portador do livro entrará em contato via email cadastrado no site para tratar mais detalhes. <br> <strong>Fique de olho!!<strong> ",
         icon: "success",
         iconColor: '#155d9c',
         color: "#000",
         showCloseButton: true,
         confirmButtonColor: "#155d9c",
-        background: "#f4f6fa",
       });
     }
   }
