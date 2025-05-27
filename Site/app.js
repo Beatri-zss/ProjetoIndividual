@@ -19,6 +19,7 @@ var indexRouter = require("./src/routes/index");
 var quizRouter = require("./src/routes/quiz")
 var livrosRouter = require("./src/routes/livros");
 var usuarioRouter = require("./src/routes/usuarios");
+var emprestimoRouter = require("./src/routes/emprestimos")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,6 +31,7 @@ app.use("/", indexRouter);
 app.use("/livros", livrosRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/quiz", quizRouter)
+app.use("/emprestimos", emprestimoRouter)
 
 app.listen(PORTA_APP, function () {
     console.log(path.join(__dirname, "public"))

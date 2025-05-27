@@ -1,49 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catalogo</title>
 
-    <link rel="stylesheet" href="../css/catalogo.css" />
-    <link rel="stylesheet" href="../css/style.css" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalogo</title>
 
-    <script src="js/sessao.js"></script>
+  <link rel="stylesheet" href="../css/catalogo.css" />
+  <link rel="stylesheet" href="../css/style.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
-      rel="stylesheet" />
+  <script src="js/sessao.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-  </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Arizonia&family=Irish+Grover&family=Pacifico&family=Poetsen+One&display=swap"
+    rel="stylesheet" />
 
-  <body onload="validarSessao(), carregarCatalogo()">
-    <nav>
-      <ul class="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#faq">Dúvidas</a></li>
-        <li><a href="#">Catálogo</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="quiz.html">Quiz</a></li>
-      </ul>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+</head>
 
-      <div id="botoesAutenticaoNav">
-        <a class="entrar" href="login.html">Entrar</a>
-        <a class="fazerParte" href="cadastro.html">Faça parte</a>
-      </div>
+<body onload="validarSessao(), carregarCatalogo()">
+  <nav>
+    <ul class="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#faq">Dúvidas</a></li>
+      <li><a href="#">Catálogo</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
 
-      <div id="usuarioLogadoNav"></div>
-    </nav>
-
-    <div class="container">
-      <div id="listaLivros"></div>
+    <div id="botoesAutenticaoNav">
+      <a class="entrar" href="login.html">Entrar</a>
+      <a class="fazerParte" href="cadastro.html">Faça parte</a>
     </div>
 
-    <dialog id="modalDetalhesLivro"></dialog>
-  </body>
+    <div id="usuarioLogadoNav"></div>
+  </nav>
+
+  <div class="container">
+    <div id="listaLivros"></div>
+  </div>
+
+  <dialog id="modalDetalhesLivro"></dialog>
+</body>
+
 </html>
 <script>
   var livros = [];
@@ -60,17 +62,17 @@
             livros = json;
 
             json.forEach((livro, index) => {
-              var classeIndisponivel = "";
+              var indisponivel = "";
 
               if (livro.disponivel == false) {
-                classeIndisponivel = "indisponivel";
+                indisponivel = "disabled";
               }
 
               htmlLivros += `
-                <div class="livro ${classeIndisponivel}">
+                <div class="livro ${indisponivel}">
                     <img src="${livro.url_capa}">
                     <p>${livro.titulo}</p>
-                    <button class="botao-emprestar" onclick="pedirEmprestado()"> Pedir emprestado </button>
+                    <button class="botao-emprestar" onclick="pedirEmprestado(${livro.idLivro})" ${indisponivel}> Pedir emprestado </button>
                     <button class="botao-detalhes-livro" onclick ="verDetalhes(${index})">Mais detalhes</button>
                 </div>
             `;
@@ -85,7 +87,7 @@
       });
   }
 
-  function pedirEmprestado() {
+  function pedirEmprestado(idLivro) {
     if (sessionStorage.ID_USUARIO == undefined) {
       Swal.fire({
         title: 'Erro ao solicitar empréstimo!',
@@ -99,17 +101,43 @@
 
       });
     } else {
-        // Se usuário está logado fazer solicitação
+      // Se usuário está logado fazer solicitação
+      fetch("/emprestimos/emprestar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          idLivro: idLivro,
+          idUsuario: sessionStorage.ID_USUARIO
+        })
+      }).then(retorno => {
 
-      Swal.fire({
-        title: "Solicitação criada com sucesso!",
-        html: "O portador do livro entrará em contato via email cadastrado no site para tratar mais detalhes. <br> <strong>Fique de olho!!<strong> ",
-        icon: "success",
-        iconColor: '#155d9c',
-        color: "#000",
-        showCloseButton: true,
-        confirmButtonColor: "#155d9c",
-      });
+        if (retorno.ok) {
+          Swal.fire({
+            title: "Solicitação criada com sucesso!",
+            html: "O portador do livro entrará em contato via email cadastrado no site para tratar mais detalhes. <br> <strong>Fique de olho!!<strong> ",
+            icon: "success",
+            iconColor: '#155d9c',
+            color: "#000",
+            showCloseButton: true,
+            confirmButtonColor: "#155d9c",
+          });
+        }
+        else {
+          retorno.text().then(erro => {
+            Swal.fire({
+              title: 'Erro ao solicitar empréstimo!',
+              text: erro,
+              icon: 'error',
+              showCloseButton: true,
+              confirmButtonColor: "#155d9c",
+              confirmButtonText: 'OK'
+
+            });
+          })
+        }
+      })
     }
   }
 
