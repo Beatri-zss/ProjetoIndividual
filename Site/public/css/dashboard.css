@@ -33,22 +33,24 @@
 }
 
 .kpi .valor {
-  font-size: 26px;
+  font-size: 24px;
   margin-top: 10px;
   color: var(--amarelo);
 }
 
 .graficos-container {
-  display: grid;
+  display: flex;
   align-items: center;
   justify-content: center;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 60px;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
 .grafico {
-  width: 550px;
-  margin: 0 auto;
+  width: 650px;
+  box-shadow: 1px -1px 44px 19px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  border-radius: 10px;
 }
 
 .grafico-pizza {
