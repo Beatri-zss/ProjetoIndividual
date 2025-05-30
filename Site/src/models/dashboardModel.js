@@ -3,7 +3,7 @@ var database = require("../database/config")
 
  // funções para obter KPIs:
 function obterDuracaoEmprestimoAtual(idUsuario) {
-    var instrucaoSql = `SELECT DATEDIFF(CURRENT_DATE(), data_emprestimo) AS 'duracaoMediaEmprestimo' FROM emprestimo WHERE fk_usuario = ${idUsuario} AND data_devolucao IS NULL`
+    var instrucaoSql = `SELECT DATEDIFF(CURRENT_DATE(), data_emprestimo) AS 'duracaoEmprestimoAtual' FROM emprestimo WHERE fk_usuario = ${idUsuario} AND data_devolucao IS NULL`
     return database.executar(instrucaoSql)
 }
 
@@ -31,12 +31,12 @@ function obterHistoricoPontuacaoQuiz(idUsuario){
 }
 
 function obterQuantidadeLivrosGeneros(idUsuario){
-    var instrucaoSql = `SELECT genero, count(*) AS 'qtdPorGenero' FROM emprestimo INNER JOIN livroON fk_livro = idLivro WHERE fk_usuario = ${idUsuario} GROUP BY genero`
+    var instrucaoSql = `SELECT genero, count(*) AS 'qtdPorGenero' FROM emprestimo INNER JOIN livro ON fk_livro = idLivro WHERE fk_usuario = ${idUsuario} GROUP BY genero`
     return database.executar(instrucaoSql)
 }
 
-function obterGenerosFavoritosUsuarios(){
-    var instrucaoSql = `SELECT generoFavorito AS 'generofavorito', count(idUsuario) AS 'qtdUsuarios' FROM usuario GROUP BY generoFavorito`
+function obterTop5LivrosMaisFavoritados (){
+    var instrucaoSql = `SELECT livro.titulo, count(idLivro) AS 'x favoritos 'FROM livro JOIN livro_favoritado ON idLivro = fk_livro GROUP BY livro.titulo ORDER BY count(idLivro) limit 5 `
     return database.executar(instrucaoSql)
 }
 
@@ -50,8 +50,9 @@ module.exports = {
     obterQuantidadeEmprestimo,
     obterPontuacaoMaximaQuiz,
     obterQuantidadeLivrosFavoritados,
+
     obterHistoricoPontuacaoQuiz,
     obterQuantidadeLivrosGeneros,
-    obterGenerosFavoritosUsuarios,
+    obterTop5LivrosMaisFavoritados,
     obterTop3MaisEmprestados
 }
