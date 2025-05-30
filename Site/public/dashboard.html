@@ -20,7 +20,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </head>
 
-<body onload="validarUsuarioLogado(), validarSessao()">
+<body onload="validarUsuarioLogado(), validarSessao(), obterKpis()">
   <nav>
     <ul class="navLinks">
       <li><a href="index.html">Home</a></li>
@@ -39,23 +39,8 @@
   </nav>
 
   <div id="dashboard">
-    <ul class="kpisContainer">
-      <li class="kpi">
-        <p class="descricao">Quantidade livros favoritos</p>
-        <p class="valor">4</p>
-      </li>
-      <li class="kpi">
-        <p class="descricao">Duração do empréstimo atual</p>
-        <p class="valor">6 dias</p>
-      </li>
-      <li class="kpi">
-        <p class="descricao">Quantidade de empréstimos feitos</p>
-        <p class="valor">5</p>
-      </li>
-      <li class="kpi">
-        <p class="descricao">Melhor pontuação no quiz</p>
-        <p class="valor">10</p>
-      </li>
+    <ul id="kpisContainer">
+
     </ul>
 
     <div class="graficos-container">
@@ -255,4 +240,36 @@
       },
     },
   });
+
+  function obterKpis() {
+
+    fetch(`/dashboard/kpis?idUsuario=${sessionStorage.ID_USUARIO}`).then(function (resultado) {
+      if (resultado.ok) {
+        resultado.json().then(function (json) {
+
+          console.log(json)
+
+          kpisContainer.innerHTML = `
+          <li class="kpi">
+            <p class="descricao">Quantidade livros favoritos</p>
+            <p class="valor">4</p>
+          </li>
+          <li class="kpi">
+            <p class="descricao">Duração do empréstimo atual</p>
+            <p class="valor">${json.duracacaEmprestimoAtual} dias</p>
+          </li>
+          <li class="kpi">
+            <p class="descricao">Quantidade de empréstimos feitos</p>
+            <p class="valor">${json.quantidadeEmprestimo}</p>
+          </li>
+          <li class="kpi">
+            <p class="descricao">Melhor pontuação no quiz</p>
+            <p class="valor">${json.pontuacaoMaxima}</p>
+          </li>`
+        })
+      }
+    })
+
+  }
+
 </script>

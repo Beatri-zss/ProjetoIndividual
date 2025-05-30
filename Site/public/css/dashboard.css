@@ -4,7 +4,7 @@
   padding: 20px var(--padding-horizontal-padrao);
 }
 
-.kpisContainer {
+#kpisContainer {
   display: flex;
   align-items: stretch;
   gap: 30px;

@@ -20,6 +20,7 @@ var quizRouter = require("./src/routes/quiz")
 var livrosRouter = require("./src/routes/livros");
 var usuarioRouter = require("./src/routes/usuarios");
 var emprestimoRouter = require("./src/routes/emprestimos")
+var dashboardRouter = require("./src/routes/dashboard")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,8 +31,9 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/livros", livrosRouter);
 app.use("/usuarios", usuarioRouter);
-app.use("/quiz", quizRouter)
-app.use("/emprestimos", emprestimoRouter)
+app.use("/quiz", quizRouter);
+app.use("/emprestimos", emprestimoRouter);
+app.use("/dashboard", dashboardRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(path.join(__dirname, "public"))
