@@ -87,21 +87,6 @@
                 </div>
             </div>
 
-            <label>Qual seu gênero de livro favorito?</label>
-            <select id="selectGenero">
-                <option value="" selected disabled>Selecione um gênero...</option>
-                <option value="Terror">👻 Terror</option>
-                <option value="Romance">❤️ Romance</option>
-                <option value="Ficção Cientifica">🤖 Ficção científica</option>
-                <option value="Distopia">💣 Distopia</option>
-                <option value="Fantasia">🧚 Fantasia</option>
-                <option value="Não-Ficção">🧠 Não-Ficção</option>
-                <option value="Suspense">🔎 Suspense</option>
-                <option value="Mangá/HQ">🦸🏼‍♂️ Mangá/HQ</option>
-                <option value="Aventura">🗺️ Aventura</option>
-                <option value="Outros">📚 Outros</option>
-            </select>
-
             <button class="botao-cadastrar" onclick="validar()">Fazer Parte!</button>
             <span>Já possui uma conta? <a href="Login.html"> Clique aqui!</a>
             </span>
@@ -122,11 +107,7 @@
         var email = inputEmail.value;
         var senha = inputSenha.value;
         var confirmarSenha = inputSenhaConfirmar.value;
-        var generoFavorito = selectGenero.value
         var mensagemError = ""
-
-
-
 
         if (
             nome == "" ||
@@ -189,14 +170,11 @@
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
                 nomeServer: nome,
                 sobrenomeServer: sobrenome,
                 emailServer: email,
                 telefoneServer: telefone,
                 senhaServer: senha,
-                generoFavoritoServer: generoFavorito,
             }),
         })
             .then(function (resposta) {
