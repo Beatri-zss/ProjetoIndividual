@@ -53,7 +53,7 @@
   function carregarCatalogo() {
     var htmlLivros = "";
 
-    fetch("/livros/listar")
+    fetch(`/livros/listar?idUsuario=${sessionStorage.ID_USUARIO}`)
       .then(function (resultado) {
         console.log(resultado);
 
@@ -63,6 +63,14 @@
 
             json.forEach((livro, index) => {
               var indisponivel = "";
+              var iconeFavorito = "";
+
+              if (livro.favoritado == true) {
+                iconeFavorito = `<img src="assets/heart-fill.svg">`
+              }
+              else {
+                iconeFavorito = `<img src="assets/heart-thin.svg">`
+              }
 
               if (livro.disponivel == false) {
                 indisponivel = "disabled";
@@ -70,10 +78,11 @@
 
               htmlLivros += `
                 <div class="livro ${indisponivel}">
-                    <img src="${livro.url_capa}">
+                    <img src="${livro.url_capa}"  class="capa">
                     <p>${livro.titulo}</p>
                     <button class="botao-emprestar" onclick="pedirEmprestado(${livro.idLivro})" ${indisponivel}> Pedir emprestado </button>
                     <button class="botao-detalhes-livro" onclick ="verDetalhes(${index})">Mais detalhes</button>
+                   <button class = "botao-favoritar" onclick="favoritar(${livro.idLivro})">${iconeFavorito}</button>
                 </div>
             `;
             });
@@ -85,6 +94,53 @@
       .catch(function (erro) {
         console.log(erro);
       });
+  }
+
+  function favoritar(idLivro) {
+
+    if (sessionStorage.ID_USUARIO == undefined) {
+      Swal.fire({
+        title: 'Erro ao favoritar livro!',
+        text: 'Você deve entrar na sua conta para favoritar um livro.',
+        icon: 'error',
+        showCloseButton: true,
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: "#155d9c",
+        confirmButtonText: '<a href="login.html">Ir para login</a>'
+
+      });
+    } else {
+      // Se usuário está logado pode fazer solicitação
+      fetch("/livros/favoritar", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          idLivro: idLivro,
+          idUsuario: sessionStorage.ID_USUARIO
+        })
+      }).then(retorno => {
+
+        if (retorno.ok) {
+          carregarCatalogo()
+        }
+        else {
+          retorno.text().then(erro => {
+            Swal.fire({
+              title: 'Erro ao solicitar empréstimo!',
+              text: erro,
+              icon: 'error',
+              showCloseButton: true,
+              confirmButtonColor: "#155d9c",
+              confirmButtonText: 'OK'
+
+            });
+          })
+        }
+      })
+    }
   }
 
   function pedirEmprestado(idLivro) {

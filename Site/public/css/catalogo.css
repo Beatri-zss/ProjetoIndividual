@@ -9,15 +9,23 @@
     flex-wrap: wrap;
 }
 
+.livro {
 
-.livro img {
-    height: 325px;
-    width: 225px;
+    position: relative;
+    width: 280px;
+
+}
+
+.livro .capa {
+    height: 425px;
+    width: 100%;
     border-radius: 10px;
+    object-fit: cover;
 }
 
 
-.livro.disabled img {
+
+.livro.disabled .capa {
     filter: grayscale(1);
 }
 
@@ -54,6 +62,24 @@
 .botao-detalhes-livro {
     border: solid var(--azul) 1.5px;
     background-color: transparent;
+}
+
+.livro .botao-favoritar {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 35px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background-color: transparent;
+}
+
+.botao-favoritar img {
+    width: 100%;
 }
 
 #modalDetalhesLivro {
@@ -123,4 +149,4 @@ dialog::backdrop {
 
 .swal2-actions .swal2-confirm a {
     color: #fff;
-} 
+}

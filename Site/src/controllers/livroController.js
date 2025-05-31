@@ -1,7 +1,17 @@
 var livroModel = require("../models/livroModel");
 
 function listar(req, res) {
-  livroModel.listar().then((resultado) => {
+
+  var idUsuario;
+
+  if (req.query.idUsuario != "undefined") {
+    idUsuario = req.query.idUsuario;
+  }
+  else {
+    idUsuario = 0;
+  }
+
+  livroModel.listar(idUsuario).then((resultado) => {
     if (resultado.length > 0) {
       res.status(200).json(resultado);
     } else {
@@ -14,6 +24,26 @@ function listar(req, res) {
   });
 }
 
+function favoritar(req, res) {
+  var idLivro = req.body.idLivro;
+  var idUsuario = req.body.idUsuario;
+
+  livroModel.verificarFavorito(idLivro, idUsuario).then(function (resultado) {
+    if (resultado.length != 0) {
+      livroModel.removerFavorito(idLivro, idUsuario).then(function (resultadoRemovido) {
+        return res.status(200).json()
+      })
+    }
+    else {
+      livroModel.adicionarFavorito(idLivro, idUsuario).then(function (resultadoAdicionado) {
+        return res.status(200).json()
+      })
+    }
+  })
+}
+
+
 module.exports = {
   listar,
+  favoritar
 }
