@@ -119,16 +119,18 @@
 
                         window.location = "catalogo.html"
                     })
-                }
+                } else {
 
-                Swal.fire({
-                    title: "Não foi possível realizar o login!",
-                    html: "Email ou senha inválido(s)",
-                    icon: "error",
-                    color: "#000",
-                    confirmButtonColor: "#155d9c",
-                    background: "#f4f6fa"
-                });
+
+                    Swal.fire({
+                        title: "Não foi possível realizar o login!",
+                        html: "Email ou senha inválido(s)",
+                        icon: "error",
+                        color: "#000",
+                        confirmButtonColor: "#155d9c",
+                        background: "#f4f6fa"
+                    });
+                }
             })
     }
 
