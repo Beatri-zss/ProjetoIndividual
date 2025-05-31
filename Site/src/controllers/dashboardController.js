@@ -43,9 +43,9 @@ function obterQuantidadeLivrosFavoritados(req, res) {
     .obterQuantidadeLivrosFavoritados(idUsuario)
     .then((resultado) => {
       if (resultado.length == 0) {
-        retorno.quantidadeLivrosFavoritados = 0;
+        res.status(204).json(0);
       } else {
-        retorno.quantidadeLivrosFavoritados = resultado[0].qtdFavoritos;
+        res.status(200).json(resultado[0].qtdFavoritos);
       }
     });
 }

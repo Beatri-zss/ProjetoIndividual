@@ -18,7 +18,7 @@ function obterPontuacaoMaximaQuiz (idUsuario){
 }
 
 function obterQuantidadeLivrosFavoritados (idUsuario){
-    var instrucaoSql = ` SELECT count(*) AS 'qtdFavoritos'FROM favoritos WHERE fk_usuario = ${idUsuario}`
+    var instrucaoSql = ` SELECT count(*) AS 'qtdFavoritos'FROM livro_favoritado WHERE fk_usuario = ${idUsuario}`
     return database.executar(instrucaoSql)
 
 }

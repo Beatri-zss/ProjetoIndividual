@@ -16,7 +16,7 @@ router.get("/pontuacaoMaxima", function (req,res){
     dashboardController.obterPontuacaoMaximaQuiz(req, res)
 })
 
-router.get("/quantidadeLivrosFavoritosUsuarios", function ( req,res){
+router.get("/quantidadeLivrosFavoritosUsuario", function ( req,res){
     dashboardController.obterQuantidadeLivrosFavoritados(req,res)
 })
 
