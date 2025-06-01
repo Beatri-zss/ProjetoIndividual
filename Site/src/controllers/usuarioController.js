@@ -7,7 +7,6 @@ function autenticar(req, res) {
     if (email == undefined || senha == undefined) {
         res.status(400).send("Email e/ou senha inválidos!");
     } else {
-
         usuarioModel.autenticar(email, senha)
             .then(
                 function (resultadoAutenticar) {

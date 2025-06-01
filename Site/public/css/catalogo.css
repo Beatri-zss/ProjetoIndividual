@@ -4,8 +4,8 @@
 
 #listaLivros {
     display: flex;
-    column-gap: 25px;
-    row-gap: 30px;
+    justify-content: center;
+    gap: 35px;
     flex-wrap: wrap;
 }
 

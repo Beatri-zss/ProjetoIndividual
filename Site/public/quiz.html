@@ -41,7 +41,7 @@
     <div class="container">
       <div class="container-esquerdo">
         <p id="contadorPergunta">Questão 1 de 10</p>
-        <p id="pergunta">Quem é o pai de Percy Jackson?</p>
+        <p id="enunciado">Quem é o pai de Percy Jackson?</p>
         <div id="barraProgresso">
           <div id="preenchimento"></div>
         </div>
@@ -65,7 +65,7 @@
 </html>
 
 <script>
-  var contagemPerguntas = 1;
+  var contadorPerguntaAtual = 1;
   var contadorAcertos = 0;
   var perguntas = [];
 
@@ -86,33 +86,33 @@
   }
 
   function exibirPergunta() {
-    var perguntaAtual = perguntas[contagemPerguntas - 1];
+    var perguntaAtual = perguntas[contadorPerguntaAtual - 1];
 
-    pergunta.innerHTML = perguntaAtual.enunciado;
+    enunciado.innerHTML = perguntaAtual.enunciado;
 
     respostas.innerHTML = `
-        <button class="resposta" id="respostaA" onclick="responder('alternativaA', 'respostaA')">
+        <button class="resposta" id="alternativaA" onclick="responder('alternativaA')">
             <span> A </span>
             <p> ${perguntaAtual.alternativaA} </p>
         </button>
-        <button class="resposta" id="respostaB" onclick="responder('alternativaB', 'respostaB')">
+        <button class="resposta" id="alternativaB" onclick="responder('alternativaB')">
             <span> B </span>
             <p> ${perguntaAtual.alternativaB} </p>
         </button>
-        <button class="resposta" id="respostaC" onclick="responder('alternativaC', 'respostaC')">
+        <button class="resposta" id="alternativaC" onclick="responder('alternativaC')">
             <span> C </span>
             <p> ${perguntaAtual.alternativaC} </p>
         </button>
-        <button class="resposta" id="respostaD" onclick="responder('alternativaD', 'respostaD')">
+        <button class="resposta" id="alternativaD" onclick="responder('alternativaD')">
             <span> D </span>
             <p> ${perguntaAtual.alternativaD} </p>
         </button>
     `;
   }
 
-  function responder(alternativa, idElementoClicado) {
-    var perguntaAtual = perguntas[contagemPerguntas - 1];
-    var elementoClicado = document.getElementById(idElementoClicado)
+  function responder(alternativa) {
+    var perguntaAtual = perguntas[contadorPerguntaAtual - 1];
+    var elementoClicado = document.getElementById(alternativa)
 
     if (perguntaAtual.respostaCorreta == alternativa) {
       elementoClicado.classList.add("certo"); // Adicionando a classe "certo" na alternativa clicada
@@ -122,33 +122,33 @@
     }
 
     /* Desabilitando os botões de alternativas */
-    respostaA.disabled = true;
-    respostaB.disabled = true;
-    respostaC.disabled = true;
-    respostaD.disabled = true;
+    alternativaA.disabled = true;
+    alternativaB.disabled = true;
+    alternativaC.disabled = true;
+    alternativaD.disabled = true;
 
     /* Habilitando o botão para ir para a próxima pergunta */
     botaoProximaPergunta.disabled = false;
   }
 
   function proximaPergunta() {
-    contagemPerguntas++;
+    contadorPerguntaAtual++;
 
-    if (contagemPerguntas <= perguntas.length) {
+    if (contadorPerguntaAtual <= perguntas.length) {
       exibirPergunta();
-      preenchimento.style.width = `${contagemPerguntas * 10}%`;
+      preenchimento.style.width = `${contadorPerguntaAtual * 10}%`;
 
       /* Desabilitando o botão que vai para a próxima pergunta */
       botaoProximaPergunta.disabled = true;
 
       // Atualizando contagem da questão atual
-      contadorPergunta.innerHTML = `Questão ${contagemPerguntas} de ${perguntas.length}`;
+      contadorPergunta.innerHTML = `Questão ${contadorPerguntaAtual} de ${perguntas.length}`;
     } 
     else {
       // Aqui o usuário finalizou o quiz
 
       // escondendo elementos relacionados as perguntas
-      pergunta.style.display = "none";
+      enunciado.style.display = "none";
       barraProgresso.style.display = "none";
       contadorPergunta.style.display = "none";
       containerRespostas.style.display = "none";

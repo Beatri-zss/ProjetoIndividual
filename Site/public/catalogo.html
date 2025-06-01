@@ -58,12 +58,13 @@
         console.log(resultado);
 
         if (resultado.ok) {
-          resultado.json().then(function (json) {
-            livros = json;
+          resultado.json().then(function (jsonLivros) {
+            livros = jsonLivros;
 
-            json.forEach((livro, index) => {
-              var indisponivel = "";
+            for (var i = 0; i < jsonLivros.length; i++) {
+              var classeIndisponivel = "";
               var iconeFavorito = "";
+              var livro = jsonLivros[i]
 
               if (livro.favoritado == true) {
                 iconeFavorito = `<img src="assets/heart-fill.svg">`
@@ -73,19 +74,19 @@
               }
 
               if (livro.disponivel == false) {
-                indisponivel = "disabled";
+                classeIndisponivel = "disabled";
               }
 
               htmlLivros += `
-                <div class="livro ${indisponivel}">
-                    <img src="${livro.url_capa}"  class="capa">
+                <div class="livro ${classeIndisponivel}">
+                    <img src="${livro.url_capa}" class="capa">
                     <p>${livro.titulo}</p>
-                    <button class="botao-emprestar" onclick="pedirEmprestado(${livro.idLivro})" ${indisponivel}> Pedir emprestado </button>
-                    <button class="botao-detalhes-livro" onclick ="verDetalhes(${index})">Mais detalhes</button>
+                    <button class="botao-emprestar" ${classeIndisponivel} onclick="pedirEmprestado(${livro.idLivro})"> Pedir emprestado </button>
+                    <button class="botao-detalhes-livro" onclick ="verDetalhes(${i})">Mais detalhes</button>
                    <button class = "botao-favoritar" onclick="favoritar(${livro.idLivro})">${iconeFavorito}</button>
                 </div>
             `;
-            });
+            }
 
             listaLivros.innerHTML = htmlLivros;
           });
@@ -129,13 +130,12 @@
         else {
           retorno.text().then(erro => {
             Swal.fire({
-              title: 'Erro ao solicitar empréstimo!',
+              title: 'Erro ao favoritar livro!',
               text: erro,
               icon: 'error',
               showCloseButton: true,
               confirmButtonColor: "#155d9c",
               confirmButtonText: 'OK'
-
             });
           })
         }
@@ -168,7 +168,7 @@
           idUsuario: sessionStorage.ID_USUARIO
         })
       }).then(retorno => {
-
+        console.log(retorno)
         if (retorno.ok) {
           Swal.fire({
             title: "Solicitação criada com sucesso!",
