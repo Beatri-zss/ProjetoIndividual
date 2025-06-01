@@ -40,7 +40,7 @@ span {
     background-color: var(--amarelo);
 }
 
-.dashboard-link {
+.faq-link {
     padding: 5px;
     border-radius: 50%;
 
@@ -58,7 +58,7 @@ span {
     /* animation: jump 1.1s 5s infinite; */
 }
 
-.dashboard-link img {
+.faq-link img {
     width: 30px;
     height: 30px;
 }
@@ -148,7 +148,7 @@ span {
     /* isso faz com que a caixa que estava guardando as respostas encolha = respostas vazadas*/
     overflow: hidden;
     /* isso significa que tudo que ficar vazado da estrutura ficará escondido */
-    transition: max-height .5s, padding .5s;
+    transition: max-height 0.5s, padding 0.5s;
 }
 
 .faq .resposta a,
@@ -173,7 +173,6 @@ span {
     font-size: 50px;
     color: #0f406c;
     background-color: #FFC100;
-
 }
 
 footer {

@@ -19,7 +19,6 @@ body {
     min-height: 100vh;
 }
 
-
 nav {
     display: flex;
     column-gap: 20px;
@@ -59,7 +58,7 @@ nav {
     right: 0;
 
     transform: scale(0);
-    transition: transform 0.4s ease;
+    transition: transform 0.4s;
 }
 
 .navLinks li:hover::after {
@@ -70,7 +69,8 @@ nav {
 .fazerParte {
     border-radius: 10px;
     font-size: 20px;
-    transition: transform 0.3s ease-in;
+    transform: scale(1);
+    transition: transform 0.3s;
 }
 
 .entrar:hover,
