@@ -22,7 +22,6 @@ function limparSessao() {
 // Função usada em páginas onde o usuário deve estar logado para acessar
 function validarUsuarioLogado() {
     if(sessionStorage.ID_USUARIO == undefined){
-        // Fechar automático ou esperar usuário clicar no botão?
         Swal.fire({
         title: 'Acesso negado!',
         html: 'Você deve entrar na sua conta para acessar essa tela!',
@@ -34,8 +33,8 @@ function validarUsuarioLogado() {
         cancelButtonText: 'Cancelar',
         confirmButtonText: 'Ir para login'
       })
-      .then(resultado => {
-        if(resultado.dismiss == Swal.DismissReason.cancel){
+      .then(function (resultado) {
+        if(resultado.dismiss == Swal.DismissReason.cancel || resultado.dismiss == Swal.DismissReason.backdrop || resultado.dismiss == Swal.DismissReason.esc ){
             history.back()
         }
         else {
