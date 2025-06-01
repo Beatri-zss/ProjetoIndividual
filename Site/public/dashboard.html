@@ -1,165 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard</title>
 
-    <link rel="stylesheet" href="../css/dashboard.css" />
-    <link rel="stylesheet" href="../css/style.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
 
-    <script src="js/sessao.js"></script>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/style.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap"
-      rel="stylesheet"
-    />
+  <script src="js/sessao.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-  </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet" />
 
-  <body
-    onload="validarUsuarioLogado(), validarSessao(), obterKpis(), carregarGraficos()"
-  >
-    <nav>
-      <ul class="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#faq">Dúvidas</a></li>
-        <li><a href="catalogo.html">Catálogo</a></li>
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="quiz.html">Quiz</a></li>
-      </ul>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+</head>
 
-      <div id="botoesAutenticaoNav">
-        <a class="entrar" href="login.html">Entrar</a>
-        <a class="fazerParte" href="cadastro.html">Faça parte</a>
+<body onload="validarUsuarioLogado(), validarSessao(), obterKpis(), carregarGraficos()">
+  <nav>
+    <ul class="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#faq">Dúvidas</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+
+    <div id="botoesAutenticaoNav">
+      <a class="entrar" href="login.html">Entrar</a>
+      <a class="fazerParte" href="cadastro.html">Faça parte</a>
+    </div>
+
+    <div id="usuarioLogadoNav"></div>
+  </nav>
+
+  <div id="dashboard">
+    <ul id="kpisContainer"></ul>
+
+    <div class="graficos-container">
+      <div class="grafico">
+        <canvas id="historicoTentativasQuiz"></canvas>
       </div>
 
-      <div id="usuarioLogadoNav"></div>
-    </nav>
+      <div class="grafico">
+        <canvas id="generosMaisLidos"></canvas>
+      </div>
 
-    <div id="dashboard">
-      <ul id="kpisContainer"></ul>
+      <div class="grafico">
+        <canvas id="livrosMaisFavoritados"></canvas>
+      </div>
 
-      <div class="graficos-container">
-        <div class="grafico">
-          <canvas id="historicoTentativasQuiz"></canvas>
-        </div>
-
-        <div class="grafico">
-          <canvas id="generosMaisLidos"></canvas>
-        </div>
-
-        <div class="grafico">
-          <canvas id="generoFavoritoUsuarios"></canvas>
-        </div>
-
-        <div class="grafico">
-          <canvas id="livrosMaisEmprestados"></canvas>
-        </div>
+      <div class="grafico">
+        <canvas id="livrosMaisEmprestados"></canvas>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
 
 <script>
-  new Chart(generoFavoritoUsuarios, {
-    type: "bar",
-    data: {
-      labels: [
-        "Terror",
-        "Romance",
-        "Aventura",
-        "Fantasia",
-        "Ficção Científica",
-      ],
-      datasets: [
-        {
-          label: "Contagem de usuários por gênero favorito",
-          data: [3, 8, 3, 4, 1, 10, 7, 6],
-          backgroundColor: [
-            "#fff75eff",
-            "#fff056ff",
-            "#ffe94eff",
-            "#ffe246ff",
-            "#ffda3dff",
-            "#ffd53eff",
-            "#fecf3eff",
-            "#fdc43fff",
-            "#fdbe39ff",
-            "#fdb833ff",
-          ],
-          hoverOffset: 4,
-        },
-      ],
-    },
-    options: {
-      plugins: {
-        legend: {
-          position: "top",
-        },
-        title: {
-          display: true,
-          text: "Gêneros literários favoritos dos usuários",
-        },
-      },
-      scales: {
-        y: {
-          min: 0,
-          max: 15,
-        },
-      },
-    },
-  });
-
-  new Chart(livrosMaisEmprestados, {
-    type: "bar",
-    data: {
-      labels: [
-        "A Revolução dos Bichos",
-        "Boa Noite Punpun Vol. 1",
-        "Alice no País das Maravilhas",
-        "Jujutsu Kaisen Vol. 1",
-        "Fahrenheit 451",
-      ],
-      datasets: [
-        {
-          label: "Contagem de usuários por gênero favorito",
-          data: [10, 8, 6, 4, 3],
-          backgroundColor: [
-            "#ffd53eff",
-            "#fecf3eff",
-            "#fdc43fff",
-            "#fdbe39ff",
-            "#fdb833ff",
-          ],
-          hoverOffset: 4,
-        },
-      ],
-    },
-    options: {
-      plugins: {
-        legend: {
-          position: "top",
-        },
-        title: {
-          display: true,
-          text: "Ranking dos livros mais emprestados",
-        },
-      },
-      scales: {
-        y: {
-          min: 0,
-          max: 15,
-        },
-      },
-    },
-  });
-
   function obterKpis() {
     fetch(
       `/dashboard/quantidadeLivrosFavoritosUsuario?idUsuario=${sessionStorage.ID_USUARIO}`
@@ -261,6 +165,7 @@
             scales: {
               y: {
                 beginAtZero: true,
+                max: 10,
               },
             },
           },
@@ -323,5 +228,105 @@
         });
       });
     });
+
+    fetch("/dashboard/top5LivrosMaisFavoritadosPelosUsuarios").then(function (resultado) {
+      resultado.json().then(function (json) {
+        var data = []
+        var labels = []
+
+        for (let i = 0; i < json.length; i++) {
+          data.push(json[i].quantidade)
+          labels.push(json[i].titulo)
+        }
+
+        new Chart(livrosMaisFavoritados, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Quantidade de vezes favoritado",
+                data: data,
+                backgroundColor: [
+                  "#fdb833ff",
+                  "#fdbe39ff",
+                  "#fdc43fff",
+                  "#fecf3eff",
+                  "#ffd53eff",
+                ],
+                hoverOffset: 4,
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              legend: {
+                position: "top",
+              },
+              title: {
+                display: true,
+                text: "Ranking dos livros mais favoritados",
+              },
+            },
+            scales: {
+              y: {
+                min: 0,
+                max: 10
+              },
+            },
+          },
+        });
+      })
+    })
+
+    fetch("/dashboard/top3LivrosMaisEmprestado").then(function (resultado) {
+      resultado.json().then(function (json) {
+        var data = []
+        var labels = []
+
+        for (let i = 0; i < json.length; i++) {
+          data.push(json[i].qtdEmprestimos);
+          labels.push(json[i].titulo)
+        }
+
+        new Chart(livrosMaisEmprestados, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Quantidade de vezes emprestado",
+                data: data,
+                backgroundColor: [
+                  "#ffd53eff",
+                  "#fecf3eff",
+                  "#fdc43fff",
+                  "#fdbe39ff",
+                  "#fdb833ff",
+                ],
+                hoverOffset: 4,
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              legend: {
+                position: "top",
+              },
+              title: {
+                display: true,
+                text: "Ranking dos livros mais emprestados",
+              },
+            },
+            scales: {
+              y: {
+                min: 0,
+                max: 10,
+              },
+            },
+          },
+        });
+      })
+    })
   }
 </script>
