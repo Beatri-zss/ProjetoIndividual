@@ -1,6 +1,6 @@
 # Biblioteca - Projeto Individual
 
-Um projeto foi desenvolvido no 1º Semestre do curso de ADS na SPTech School. Esse projeto é uma biblioteca na qual disponibilizo os meus livros para empréstimo para os alunos da faculdade.
+O projeto foi desenvolvido no 1º Semestre do curso de ADS na SPTech School. Esse projeto é uma biblioteca na qual disponibilizo os meus livros para empréstimo para os alunos da faculdade.
 
 <hr>
 
