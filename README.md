@@ -14,7 +14,7 @@ O projeto foi desenvolvido no 1º Semestre do curso de ADS na SPTech School. Ess
 
 • Usuários podem favoritar livros e futuramente poderão consultar esses livros favoritos.
 
-• O site possui um quiz com questões de literatura no geral onde o usuário realizar quantas tentativas quiser e cada tentativa possui 10 questões geradas aleatoriamente a serem respondidas.
+• O site possui um quiz com questões de literatura no geral onde o usuário pode realizar quantas tentativas quiser e cada tentativa possui 10 questões geradas aleatoriamente a serem respondidas.
 
 • O usuário pode acessar uma dashboard onde pode visualizar KPI's com as seguintes informações:
     <br>
