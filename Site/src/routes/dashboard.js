@@ -34,7 +34,7 @@ router.get("/top5LivrosMaisFavoritadosPelosUsuarios", function(req,res){
 })
 
 router.get("/top3LivrosMaisEmprestado",function(req,res){
-    dashboardController.obterTop3MaisEmprestados(req,res)
+    dashboardController.obterTop5MaisEmprestados(req,res)
 })
 
 module.exports = router

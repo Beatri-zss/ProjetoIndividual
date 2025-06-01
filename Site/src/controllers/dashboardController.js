@@ -5,7 +5,7 @@ function obterDuracaoEmprestimoAtual(req, res) {
 
   dashboardModel.obterDuracaoEmprestimoAtual(idUsuario).then((resultado) => {
     if (resultado.length == 0) {
-      res.status(204).json(0);
+      res.status(200).json(0);
     } else {
       res.status(200).json(resultado[0].duracaoEmprestimoAtual);
     }
@@ -16,11 +16,7 @@ function obterPontuacaoMaximaQuiz(req, res) {
   var idUsuario = req.query.idUsuario;
 
   dashboardModel.obterPontuacaoMaximaQuiz(idUsuario).then((resultado) => {
-    if (resultado.length == 0) {
-      res.status(204).json();
-    } else {
       res.status(200).json(resultado[0].pontuacaoMaxima);
-    }
   });
 }
 
@@ -54,7 +50,7 @@ function obterHistoricoPontuacaoQuiz(req, res) {
   var idUsuario = req.query.idUsuario;
 
   dashboardModel.obterHistoricoPontuacaoQuiz(idUsuario).then((resultado) => {
-    if (resultado.length == 0) res.status(204).json([]);
+    if (resultado.length == 0) res.status(200).json([]);
     else res.status(200).json(resultado);
   });
 }
@@ -65,20 +61,20 @@ function obterQuantidadeLivrosLidosGenero(req, res) {
   dashboardModel
     .obterQuantidadeLivrosGeneros(idUsuario)
     .then(function (resultado) {
-      if (resultado.length == 0) res.status(204).json([]);
+      if (resultado.length == 0) res.status(200).json([]);
       else res.status(200).json(resultado);
     });
 }
 
 function obterTop5LivrosMaisFavoritados(req, res) {
   dashboardModel.obterTop5LivrosMaisFavoritados().then(function (resultado) {
-    if (resultado.length == 0) res.status(204).json([]);
+    if (resultado.length == 0) res.status(200).json([]);
     else res.status(200).json(resultado);
   });
 }
 
-function obterTop3MaisEmprestados(req, res) {
-  dashboardModel.obterTop3MaisEmprestados().then(function (resultado) {
+function obterTop5MaisEmprestados(req, res) {
+  dashboardModel.obterTop5MaisEmprestados().then(function (resultado) {
     if (resultado.length == 0) res.status(204).json([]);
     else res.status(200).json(resultado);
   });
@@ -95,5 +91,5 @@ module.exports = {
   obterQuantidadeLivrosLidosGenero,
   obterHistoricoPontuacaoQuiz,
   obterTop5LivrosMaisFavoritados,
-  obterTop3MaisEmprestados,
+  obterTop5MaisEmprestados,
 };
