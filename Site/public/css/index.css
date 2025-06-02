@@ -161,14 +161,14 @@ span {
     color: var(--amarelo);
 }
 
-.faq input[type=checkbox]:checked+label+.resposta {
+.faq input[type=checkbox]:checked + label + .resposta {
     padding: 20px;
     max-height: 400px;
 }
 
 /* isso pega o momento em que o input estiver checked = selecionado/marcado para aplicar um estilo, no caso vai aplicar um sinal de mais, chamar o label outro + e chamar a class .resposta*/
 
-.faq input[type=checkbox]:checked+label::after {
+.faq input[type=checkbox]:checked + label::after {
     content: '-';
     font-size: 50px;
     color: #0f406c;
