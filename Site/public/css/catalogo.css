@@ -37,6 +37,12 @@
     text-align: center;
 }
 
+.livro .autor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
 .livro button {
     color: #242865;
     display: block;
@@ -80,71 +86,6 @@
 
 .botao-favoritar img {
     width: 100%;
-}
-
-#modalDetalhesLivro {
-    margin: auto;
-    padding: 40px 30px;
-    border-radius: 15px;
-    position: relative;
-    border: solid 0.5px var(--azul);
-}
-
-dialog[open] {
-    display: flex;
-    column-gap: 50px;
-    justify-content: center;
-}
-
-dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-#modalDetalhesLivro .fechar {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-
-    width: 25px;
-    height: 25px;
-
-    font-size: 16px;
-    border-radius: 50%;
-    border: 1px solid #000;
-}
-
-#modalDetalhesLivro .titulo {
-    font-size: 26px;
-}
-
-#modalDetalhesLivro .autor {
-    font-size: 24px;
-    color: #565959;
-    margin-bottom: 20px;
-}
-
-#modalDetalhesLivro .detalhes-adicionais {
-    display: flex;
-    align-items: center;
-    column-gap: 45px;
-    margin-bottom: 20px;
-
-    font-size: 20px;
-}
-
-#modalDetalhesLivro .detalhes-adicionais span {
-    color: #565959;
-    font-size: 22px;
-}
-
-#modalDetalhesLivro .descricao {
-    font-size: 22px;
-    max-width: 580px;
-}
-
-#modalDetalhesLivro img {
-    height: 350px;
-    border-radius: 10px;
 }
 
 .swal2-actions .swal2-confirm a {

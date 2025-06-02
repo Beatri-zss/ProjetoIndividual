@@ -42,8 +42,6 @@
   <div class="container">
     <div id="listaLivros"></div>
   </div>
-
-  <dialog id="modalDetalhesLivro"></dialog>
 </body>
 
 </html>
@@ -80,9 +78,12 @@
               htmlLivros += `
                 <div class="livro ${classeIndisponivel}">
                     <img src="${livro.url_capa}" class="capa">
-                    <p>${livro.titulo}</p>
+                    <p class="titulo">${livro.titulo}</p>
+                    <p class="autor">
+                      <img src="assets/lapis.svg">
+                      ${livro.autor}
+                    </p>
                     <button class="botao-emprestar" ${classeIndisponivel} onclick="pedirEmprestado(${livro.idLivro})"> Pedir emprestado </button>
-                    <button class="botao-detalhes-livro" onclick ="verDetalhes(${i})">Mais detalhes</button>
                    <button class = "botao-favoritar" onclick="favoritar(${livro.idLivro})">${iconeFavorito}</button>
                 </div>
             `;
@@ -195,40 +196,5 @@
         }
       })
     }
-  }
-
-  function verDetalhes(indiceLivro) {
-    var livroDetalhes = livros[indiceLivro];
-
-    modalDetalhesLivro.innerHTML = `
-        <button class="fechar" onclick="modalDetalhesLivro.close()">X</button>
-        <div>
-
-            <p class="titulo">${livroDetalhes.titulo}</p>
-
-            <p class="autor">${livroDetalhes.autor}</p>
-
-            <div class="detalhes-adicionais">
-                <p>Editora:
-                    <br>
-                    <span>${livroDetalhes.editora}</span>
-                </p>
-
-                <p>Data de publicação:
-                    <br> <span>${new Date(livroDetalhes.data_publicacao).toLocaleDateString("pt-br")}</span>
-                </p>
-
-                <p>Gênero:
-                    <br>
-                    <span>${livroDetalhes.genero}</span>
-                </p>
-            </div>
-
-            <p class="descricao">${livroDetalhes.descricao}</p>
-        </div>
-
-        <img src="${livroDetalhes.url_capa}">
-`;
-    modalDetalhesLivro.showModal();
   }
 </script>
