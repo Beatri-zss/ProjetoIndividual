@@ -125,6 +125,7 @@
   }
 
   function carregarGraficos() {
+    if(sessionStorage.ID_USUARIO != undefined){
     fetch(
       `/dashboard/historicoPontuacao?idUsuario=${sessionStorage.ID_USUARIO}`
     ).then(function (resultado) {
@@ -228,6 +229,7 @@
         });
       });
     });
+  }
 
     fetch("/dashboard/top5LivrosMaisFavoritadosPelosUsuarios").then(function (resultado) {
       resultado.json().then(function (json) {
