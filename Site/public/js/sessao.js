@@ -6,7 +6,7 @@ function validarSessao() {
     var botoesAutenticao = document.getElementById("botoesAutenticaoNav")
 
     if (email != null && nome != null) {
-        usuarioLogadoNav.innerHTML = `Olá, ${nome}! <button onclick="limparSessao()"> <img src="/assets/deslogar.svg"></button>`
+        usuarioLogadoNav.innerHTML = `Olá, ${nome}! <button onclick="deslogarUsuario()"> <img src="/assets/deslogar.svg"></button>`
         botoesAutenticao.style.display = 'none'
     }
     else {
@@ -14,7 +14,7 @@ function validarSessao() {
     }
 }
 
-function limparSessao() {
+function deslogarUsuario() {
     sessionStorage.clear()
     window.location = "../index.html"
 }

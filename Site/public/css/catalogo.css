@@ -2,7 +2,7 @@
     padding: 40px var(--padding-horizontal-padrao);
 }
 
-#listaLivros {
+#divListaLivros {
     display: flex;
     justify-content: center;
     gap: 35px;

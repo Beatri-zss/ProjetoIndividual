@@ -39,7 +39,24 @@
   </nav>
 
   <div id="dashboard">
-    <ul id="kpisContainer"></ul>
+    <ul id="kpisContainer">
+      <li class="kpi">
+        <p class="descricao">Quantidade de livros favoritos</p>
+        <p class="valor" id="kpiQtdLivrosFavoritos"></p>
+      </li>
+      <li class="kpi">
+        <p class="descricao">Quantidade de empréstimos feitos</p>
+        <p class="valor" id="kpiQtdeEmprestimos"></p>
+      </li>
+      <li class="kpi">
+        <p class="descricao">Duração do empréstimo atual</p>
+        <p class="valor" id="kpiDuracaoEmprestimoAtual"></p>
+      </li>
+      <li class="kpi">
+        <p class="descricao">Melhor pontuação no quiz</p>
+        <p class="valor" id="kpiMelhorPontuacaoQuiz"></p>
+      </li>
+    </ul>
 
     <div class="graficos-container">
       <div class="grafico">
@@ -70,11 +87,7 @@
     ).then(function (resultado) {
       if (resultado.ok) {
         resultado.json().then(function (quantidadeLivrosFavoritos) {
-          kpisContainer.innerHTML += `
-            <li class="kpi">
-              <p class="descricao">Quantidade de livros favoritos</p>
-              <p class="valor">${quantidadeLivrosFavoritos}</p>
-            </li>`;
+          kpiQtdLivrosFavoritos.innerHTML = quantidadeLivrosFavoritos;
         });
       }
     });
@@ -84,11 +97,7 @@
     ).then(function (resultado) {
       if (resultado.ok) {
         resultado.json().then(function (duracaoEmprestimo) {
-          kpisContainer.innerHTML += `
-          <li class="kpi">
-            <p class="descricao">Duração do empréstimo atual</p>
-            <p class="valor">${duracaoEmprestimo} dias</p>
-            </li>`;
+          kpiDuracaoEmprestimoAtual.innerHTML = `${duracaoEmprestimo} dias`;
         });
       }
     });
@@ -98,12 +107,7 @@
     ).then(function (resultado) {
       if (resultado.ok) {
         resultado.json().then(function (quantidadeEmprestimo) {
-          kpisContainer.innerHTML += `
-          <li class="kpi">
-            <p class="descricao">Quantidade de empréstimos feitos</p>
-            <p class="valor">${quantidadeEmprestimo}</p>
-          </li>
-          `;
+          kpiQtdeEmprestimos.innerHTML = quantidadeEmprestimo;
         });
       }
     });
@@ -113,12 +117,7 @@
     ).then(function (resultado) {
       if (resultado.ok) {
         resultado.json().then(function (pontuacaoMaxima) {
-          kpisContainer.innerHTML += `
-          <li class="kpi">
-            <p class="descricao">Melhor pontuação no quiz</p>
-            <p class="valor">${pontuacaoMaxima}</p>
-          </li>
-          `;
+          kpiMelhorPontuacaoQuiz.innerHTML = pontuacaoMaxima;
         });
       }
     });

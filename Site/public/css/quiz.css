@@ -27,26 +27,25 @@
 }
 
 #barraProgresso{
-    width: 80%;
-    height: 20px;
+    width: 400px;
     padding: 5px;
     border-radius: 999px;
     background-color: #fff;                                                                                                                                                            ;
 }
 
-#barraProgresso div {
-    height: 100%;
+#barraProgresso #preenchimento {
     width: 10%;
+    height: 10px;
     border-radius: 999px;
     background-color: #155d9c;
     transition: width 0.3s;
 }
 
-#containerRespostas {
+#containerAlternativas {
     width: 565px;
 }
 
-.resposta {
+.alternativa {
     display: flex;
     align-items: center;
     background-color: #fff;
@@ -60,20 +59,20 @@
     width: 100%;
 }
 
-.resposta.certo {
+.alternativa.certo {
     border: 3px solid green;
 }
 
-.resposta.errado {
+.alternativa.errado {
     border: 3px solid red;
 }
 
-.resposta.certo:disabled,
-.resposta.errado:disabled {
+.alternativa.certo:disabled,
+.alternativa.errado:disabled {
     color: #000;
 }
 
-.resposta span {
+.alternativa span {
     border: solid 0px;
     background-color: #f4f6fa;
     padding: 10px;

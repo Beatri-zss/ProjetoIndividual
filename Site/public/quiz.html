@@ -41,7 +41,7 @@
     <div class="container">
       <div class="container-esquerdo">
         <p id="contadorPergunta">Questão 1 de 10</p>
-        <p id="enunciado">Quem é o pai de Percy Jackson?</p>
+        <p id="enunciado"></p>
         <div id="barraProgresso">
           <div id="preenchimento"></div>
         </div>
@@ -52,8 +52,8 @@
         </p>
       </div>
 
-      <div id="containerRespostas">
-        <div id="respostas"></div>
+      <div id="containerAlternativas">
+        <div id="alternativas"></div>
         <button id="botaoProximaPergunta" onclick="proximaPergunta()" disabled>
           Próxima Pergunta
         </button>
@@ -90,20 +90,20 @@
 
     enunciado.innerHTML = perguntaAtual.enunciado;
 
-    respostas.innerHTML = `
-        <button class="resposta" id="alternativaA" onclick="responder('alternativaA')">
+    alternativas.innerHTML = `
+        <button class="alternativa" id="alternativaA" onclick="responder('alternativaA')">
             <span> A </span>
             <p> ${perguntaAtual.alternativaA} </p>
         </button>
-        <button class="resposta" id="alternativaB" onclick="responder('alternativaB')">
+        <button class="alternativa" id="alternativaB" onclick="responder('alternativaB')">
             <span> B </span>
             <p> ${perguntaAtual.alternativaB} </p>
         </button>
-        <button class="resposta" id="alternativaC" onclick="responder('alternativaC')">
+        <button class="alternativa" id="alternativaC" onclick="responder('alternativaC')">
             <span> C </span>
             <p> ${perguntaAtual.alternativaC} </p>
         </button>
-        <button class="resposta" id="alternativaD" onclick="responder('alternativaD')">
+        <button class="alternativa" id="alternativaD" onclick="responder('alternativaD')">
             <span> D </span>
             <p> ${perguntaAtual.alternativaD} </p>
         </button>
@@ -136,7 +136,7 @@
 
     if (contadorPerguntaAtual <= perguntas.length) {
       exibirPergunta();
-      preenchimento.style.width = `${contadorPerguntaAtual * 10}%`;
+      preenchimento.style.width = `${contadorPerguntaAtual * 100 / perguntas.length}%`;
 
       /* Desabilitando o botão que vai para a próxima pergunta */
       botaoProximaPergunta.disabled = true;
@@ -151,13 +151,13 @@
       enunciado.style.display = "none";
       barraProgresso.style.display = "none";
       contadorPergunta.style.display = "none";
-      containerRespostas.style.display = "none";
+      containerAlternativas.style.display = "none";
 
       // editando innerHTML do containerResultado para exibir o número de acertos do usuário
       containerResultado.innerHTML = `
         <div class="card">
           <p class="totalAcertos"> 
-            ${contadorAcertos} <span class="totalPossivel"> / 10 </span>
+            ${contadorAcertos} <span class="totalPossivel"> / ${perguntas.length} </span>
           </p>
         </div>
 
@@ -177,7 +177,7 @@
           idUsuario: sessionStorage.ID_USUARIO,
           pontuacao: contadorAcertos,
         }),
-      }).catch((erro) => {
+      }).catch(function (erro) {
         Swal.fire({
           title: "Erro ao salvar o resultado do quiz!",
           html: "Ocorreu um erro inesperado, tente novamente depois!",
