@@ -4,6 +4,8 @@ function listar(req, res) {
 
   var idUsuario;
 
+  // Verifica se idUsuario != "undefined" pq caso endpoint seja chamado quando usuário não fez login o idUsuario será undefined
+  //  que pela a API será tratado como texto por isso está entre aspas
   if (req.query.idUsuario != "undefined") {
     idUsuario = req.query.idUsuario;
   }
@@ -11,7 +13,7 @@ function listar(req, res) {
     idUsuario = 0;
   }
 
-  livroModel.listar(idUsuario).then((resultado) => {
+  livroModel.listar(idUsuario).then(function (resultado) {
     if (resultado.length > 0) {
       res.status(200).json(resultado);
     } else {

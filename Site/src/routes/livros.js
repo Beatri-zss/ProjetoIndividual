@@ -7,7 +7,7 @@ router.get("/listar", function (req, res) {
   livroController.listar(req, res);
 });
 
-router.put("/favoritar", function(req,res){
+router.post("/favoritar", function(req,res){
   livroController.favoritar(req,res);
 })
 

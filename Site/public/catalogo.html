@@ -40,14 +40,12 @@
   </nav>
 
   <div class="container">
-    <div id="listaLivros"></div>
+    <div id="divListaLivros"></div>
   </div>
 </body>
 
 </html>
 <script>
-  var livros = [];
-
   function carregarCatalogo() {
     var htmlLivros = "";
 
@@ -57,7 +55,6 @@
 
         if (resultado.ok) {
           resultado.json().then(function (jsonLivros) {
-            livros = jsonLivros;
 
             for (var i = 0; i < jsonLivros.length; i++) {
               var classeIndisponivel = "";
@@ -89,7 +86,7 @@
             `;
             }
 
-            listaLivros.innerHTML = htmlLivros;
+            divListaLivros.innerHTML = htmlLivros;
           });
         }
       })
@@ -115,7 +112,7 @@
     } else {
       // Se usuário está logado pode fazer solicitação
       fetch("/livros/favoritar", {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
@@ -123,13 +120,13 @@
           idLivro: idLivro,
           idUsuario: sessionStorage.ID_USUARIO
         })
-      }).then(retorno => {
+      }).then(function (retorno) {
 
         if (retorno.ok) {
           carregarCatalogo()
         }
         else {
-          retorno.text().then(erro => {
+          retorno.text().then(function (erro) {
             Swal.fire({
               title: 'Erro ao favoritar livro!',
               text: erro,
@@ -158,7 +155,7 @@
 
       });
     } else {
-      // Se usuário está logado fazer solicitação
+      // Se usuário está logado pode fazer solicitação
       fetch("/emprestimos/emprestar", {
         method: "POST",
         headers: {
@@ -168,7 +165,7 @@
           idLivro: idLivro,
           idUsuario: sessionStorage.ID_USUARIO
         })
-      }).then(retorno => {
+      }).then(function (retorno) {
         console.log(retorno)
         if (retorno.ok) {
           Swal.fire({
@@ -182,7 +179,7 @@
           });
         }
         else {
-          retorno.text().then(erro => {
+          retorno.text().then(function (erro) {
             Swal.fire({
               title: 'Erro ao solicitar empréstimo!',
               text: erro,
